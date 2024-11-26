@@ -41,8 +41,8 @@ const Contact = () => {
               <MapPin className="w-6 h-6 text-purple-500 flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-white mb-1">Visit Us</h3>
-                <p className="text-gray-400">123 Innovation Drive</p>
-                <p className="text-gray-400">Tech Valley, CA 94043</p>
+                <p className="text-gray-400">244, First Floor A, Velachery - Tambaram Main Rd, Chinmaya Colony,
+                Selaiyur, Rajakilpakkam, Chennai, Tamil Nadu 600073</p>
               </div>
             </div>
 
@@ -50,7 +50,7 @@ const Contact = () => {
               <Phone className="w-6 h-6 text-purple-500 flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-white mb-1">Call Us</h3>
-                <p className="text-gray-400">+1 (555) 123-4567</p>
+                <p className="text-gray-400">+91 93603 78727 </p>
               </div>
             </div>
 
@@ -58,7 +58,7 @@ const Contact = () => {
               <Mail className="w-6 h-6 text-purple-500 flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-white mb-1">Email Us</h3>
-                <p className="text-gray-400">support@learnspire.com</p>
+                <p className="text-gray-400">learnspireteam@gmail.com</p>
               </div>
             </div>
           </div>

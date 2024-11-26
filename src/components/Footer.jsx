@@ -3,11 +3,11 @@ import { Facebook, Twitter, Instagram } from 'lucide-react';
 
 const Footer = () => {
   const resourceLinks = [
-    { label: 'About us', href: '#' },
-    { label: 'FAQ', href: '#' },
-    { label: 'Contact Us', href: '#' },
-    { label: 'Blogs', href: '#' },
-    { label: 'Privacy policy', href: '#' },
+    { label: 'Home', href: '/' },
+    { label: 'About us', href: '/about' },
+    { label: 'Products', href: '/products' },
+    { label: 'Contact Us', href: '/contact' },
+    { label: 'Login', href: '/login' },
   ];
 
   return (
@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-4 pt-16 pb-12">
         <div className="bg-[#111] rounded-lg p-8 mb-16">
           <h2 className="text-3xl font-semibold mb-2">Join our newsletter</h2>
-          <p className="text-gray-400 mb-6">Lorem ipsum dolor sit.</p>
+          <p className="text-gray-400 mb-6">For updates and special offers</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"

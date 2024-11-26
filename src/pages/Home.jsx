@@ -247,16 +247,10 @@ const Home = () => {
             {/* CTA Buttons */}
             <div className="mt-10 flex place-items-center gap-4">
               <a
-                href="#features"
+                href="/contact"
                 className="bg-purple-600 px-6 py-3 rounded-full shadow-lg shadow-purple-500/50 transition-all duration-500 hover:scale-105 hover:shadow-purple-500/70 hover:bg-purple-500"
               >
-                Get started
-              </a>
-              <a
-                href="#features"
-                className="flex gap-2 px-6 py-3 rounded-full border border-white transition-all duration-500 hover:bg-white hover:text-black hover:scale-105"
-              >
-                Learn more
+                Contact Us
               </a>
             </div>
           </div>
