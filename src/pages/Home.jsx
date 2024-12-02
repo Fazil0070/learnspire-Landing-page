@@ -2,7 +2,6 @@ import React, { useEffect, useCallback, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import dashboard from '../assets/dashboard.png';
-import { Link } from 'react-router-dom';
 import InsightsSection from './Insight';
 import Footer from '../components/Footer';
 import Benefits from './Benefits';

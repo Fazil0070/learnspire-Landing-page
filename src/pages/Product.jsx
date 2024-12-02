@@ -1,5 +1,6 @@
 import React from 'react';
 import { Book, Server, FlaskConical, Users } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const ProductCard = ({ icon: Icon, title, description, iconBgColor, iconColor }) => (
   <div className="group relative overflow-hidden bg-[#0B1120] rounded-2xl shadow-lg border border-gray-800 transition-all duration-300 hover:shadow-purple-500/20 hover:-translate-y-2">
@@ -70,6 +71,7 @@ const Products = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import aqeelImage from "../assets/aqeel.jpeg";
 import akashImage from "../assets/akash.jpeg";
 import fazilImage from "../assets/fazil.jpeg";
+import Footer from "../components/Footer";
 
 const TeamMember = ({ name, role, image }) => (
   <div className="group relative overflow-hidden bg-[#0B1120] rounded-xl p-6 border border-gray-800 transition-all duration-300 hover:shadow-purple-500/20 hover:-translate-y-2">
@@ -113,9 +114,9 @@ const About = () => {
             ))}
           </div>
         </div>
+        <Footer/>
       </div>
     </div>
   );
 };
-
 export default About;
