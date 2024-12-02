@@ -106,7 +106,7 @@ const InsightsSection = () => {
 
           <div className="order-1 lg:order-2 space-y-12 insights-content-first">
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Powerful Insights
               </h2>
               <p className="text-gray-400 max-w-xl">
@@ -128,7 +128,7 @@ const InsightsSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="order-1 space-y-12 insights-content-second">
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Track Everything
               </h2>
               <p className="text-gray-400 max-w-xl">
