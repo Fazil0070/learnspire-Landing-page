@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from "@emailjs/browser";
-import { Facebook, Twitter, Instagram } from 'lucide-react';
+import { Facebook, Instagram, X } from 'lucide-react';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -110,9 +110,9 @@ const Footer = () => {
               <a
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
-                aria-label="Twitter"
+                aria-label="X"
               >
-                <Twitter className="w-6 h-6" />
+                <X className="w-6 h-6" />
               </a>
               <a
                 href="#"
