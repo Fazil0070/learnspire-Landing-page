@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import{ useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import dashboard from '../assets/dashboard.png';
@@ -10,7 +10,6 @@ import Benefits from './Benefits';
 gsap.registerPlugin(ScrollTrigger);
 
 const CursorFollower = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const updateCursor = (e) => {
@@ -31,13 +30,13 @@ const CursorFollower = () => {
   );
 };
 
-const FeatureIcon = ({ children }) => (
+const FeatureIcon = (children ) => (
   <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-500 mb-4 transition-all duration-300 group-hover:bg-purple-500/20">
     {children}
   </div>
 );
 
-const FeatureCard = ({ icon, title, description }) => (
+const FeatureCard = ( icon, title, description ) => (
   <div className="group p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 backdrop-blur-sm transition-all duration-500 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-2">
     <FeatureIcon>{icon}</FeatureIcon>
     <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-purple-400 transition-colors duration-300">
