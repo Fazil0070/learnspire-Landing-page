@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Server, FlaskConical, Users } from 'lucide-react';
+import { Book, Server, FlaskConical, Users, Activity, Code, Database } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const ProductCard = ({ icon: Icon, title, description, iconBgColor, iconColor }) => (
@@ -24,36 +24,46 @@ const Products = () => {
   const products = [
     {
       icon: Book,
-      title: 'Learning Management System',
-      description:
-        'Comprehensive platform to streamline educational processes, enhance learning experiences, and track student progress effectively.',
+      title: 'Learnspire PAT',
+      description: 'Placement Assessment and Training platform to evaluate and develop student skills, ensuring career readiness and optimal job placement.',
       iconBgColor: 'bg-purple-900/30',
       iconColor: 'text-purple-400',
+    },
+    {
+      icon: Code,
+      title: 'Learnspire Coder',
+      description: 'Comprehensive coding platform that provides interactive coding challenges, real-time assessments, and skill development tools for programmers.',
+      iconBgColor: 'bg-pink-900/30',
+      iconColor: 'text-pink-400',
     },
     {
       icon: Server,
-      title: 'Technology Operations Platform',
-      description:
-        'Advanced management solution to optimize IT infrastructure, improve operational efficiency, and gain comprehensive technological insights.',
-      iconBgColor: 'bg-pink-900/30',
-      iconColor: 'text-pink-400',
-    },
-    {
-      icon: FlaskConical,
-      title: 'Laboratory Management System',
-      description:
-        'Intelligent system to manage lab resources, track experiments, schedule equipment, and streamline research workflows.',
+      title: 'Learnspire OpsTech',
+      description: 'Technology Operations Platform (TOP) to manage and optimize technological infrastructure, streamline IT processes, and enhance operational efficiency.',
       iconBgColor: 'bg-purple-900/30',
       iconColor: 'text-purple-400',
     },
     {
-      icon: Users,
-      title: 'Profiles Management System',
-      description:
-        'Seamless user profile management with advanced security, comprehensive access controls, and intuitive user data organization.',
+      icon: FlaskConical,
+      title: 'Learnspire LabSync',
+      description: 'Laboratory Management Platform (LMP) to intelligently manage lab resources, track experiments, schedule equipment, and streamline research workflows.',
       iconBgColor: 'bg-pink-900/30',
       iconColor: 'text-pink-400',
     },
+    {
+      icon: Users,
+      title: 'Learnspire Profile+',
+      description: 'Profiles Management System (PMS) offering seamless user profile management with advanced security, comprehensive access controls, and intuitive data organization.',
+      iconBgColor: 'bg-purple-900/30',
+      iconColor: 'text-purple-400',
+    },
+    {
+      icon: Database,
+      title: 'Learnspire LMS',
+      description: 'Learning Management System that provides a comprehensive platform to streamline educational processes, enhance learning experiences, and track student progress effectively.',
+      iconBgColor: 'bg-pink-900/30',
+      iconColor: 'text-pink-400',
+    }
   ];
 
   return (
@@ -62,10 +72,10 @@ const Products = () => {
       <div className="container mx-auto max-w-6xl relative z-10">
         <h1 className="text-center mb-10">
           <span className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-            Our Product Solutions
+            Learnspire Product Solutions
           </span>
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {products.map((product, index) => (
             <ProductCard key={index} {...product} />
           ))}
