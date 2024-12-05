@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@fontsource/inter": "^5.1.0",
+    "@fontsource/playfair-display": "^5.1.0",
     "bootstrap-icons": "^1.11.3",
     "framer-motion": "^11.12.0",
     "gsap": "^3.12.5",
