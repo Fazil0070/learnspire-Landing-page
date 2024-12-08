@@ -7,5 +7,9 @@ export default defineConfig({
   build: {
     outDir: 'dist', // Ensure this is correct
   },
+  server: {
+    host: true, // Needed for Docker
+    port: 5173
+  },
 
 })
