@@ -5,7 +5,7 @@ import About from './pages/about'
 import Products from './pages/product'
 import Contact from './pages/contact'
 import Header from './components/header'
-import 'index.css'
+import './index.css'
 import LoginPage from './pages/login';
 
 
