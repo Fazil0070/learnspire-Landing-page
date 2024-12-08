@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import dashboard from '../assets/dashboard.png';
 import analysis from '../assets/analysis.png';
-import codingChallenges from '../assets/Coding.png';
+import codingChallenges from '../assets/coding.png';
 import studentResults from '../assets/results.png';
 
 const InsightCard = ({ title, description }) => {
