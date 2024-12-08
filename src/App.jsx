@@ -1,12 +1,12 @@
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
-import About from 'pages/About'
-import Products from 'pages/Product'
-import Contact from 'pages/Contact'
-import Header from 'components/Header'
+import About from './pages/about'
+import Products from './pages/product'
+import Contact from './pages/contact'
+import Header from './components/header'
 import 'index.css'
-import LoginPage from 'pages/Login';
+import LoginPage from './pages/login';
 
 
 function App() {

@@ -1,5 +1,5 @@
 # File ./Dockerfile
-FROM node:19.5.0-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
