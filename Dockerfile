@@ -5,9 +5,10 @@ FROM node:20-alpine AS build-stage
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
-# Install dependencies
+
+
 RUN npm install
 
 # Copy the rest of the application files
