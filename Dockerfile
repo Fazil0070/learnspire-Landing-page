@@ -22,10 +22,6 @@ FROM nginx:alpine
 # Set the working directory for NGINX
 WORKDIR /usr/share/nginx/html
 
-# Copy the NGINX configuration file (if you have a custom one)
-# Uncomment the following line if you have a custom nginx.conf
-# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
 # Copy the build artifacts from the build stage to the NGINX web server
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html/
 
