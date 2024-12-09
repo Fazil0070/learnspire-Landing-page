@@ -1,41 +1,50 @@
 # Build stage  
 FROM node:20-alpine AS build-stage  
 
-WORKDIR /app  
+# Set the working directory
+WORKDIR /app
 
-# Copy package files  
-COPY package*.json ./  
+# Copy package files
+COPY package*.json ./
 
-# Install dependencies  
-RUN npm install  
+# Install dependencies
+RUN npm install
 
-# Copy the rest of the application files  
-COPY . .  
+# Copy the rest of the application files
+COPY . .
 
-# Build the Vite application  
-RUN npm run build  
+# Build the Vite application
+RUN npm run build
 
-# Production Stage  
-FROM nginx:alpine  
+# Production stage
+FROM nginx:alpine
 
-# Copy the NGINX configuration file  
+# Set the working directory for NGINX
+WORKDIR /usr/share/nginx/html
 
+# Copy the NGINX configuration file (if you have a custom one)
+# Uncomment the following line if you have a custom nginx.conf
+# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy the build artifacts from the build stage to NGINX web server  
-COPY --from=build-stage /app/dist/ /usr/share/nginx/html  
+# Copy the build artifacts from the build stage to the NGINX web server
+COPY --from=build-stage /app/dist/ /usr/share/nginx/html/
 
-# Configure NGINX permissions  
-RUN chown -R nginx:nginx /usr/share/nginx/html && \  \
-    chmod -R 755 /usr/share/nginx/html && \  \
-    chown -R nginx:nginx /var/cache/nginx && \  \
-    chown -R nginx:nginx /var/log/nginx && \  \
-    chown -R nginx:nginx /etc/nginx/conf.d 
+# Configure NGINX permissions
+RUN chown -R nginx:nginx /usr/share/nginx/html && \
+    chmod -R 755 /usr/share/nginx/html && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chown -R nginx:nginx /var/log/nginx && \
+    chown -R nginx:nginx /etc/nginx/conf.d
 
-RUN touch /var/run/nginx.pid && \  
-    chown -R nginx:nginx /var/run/nginx.pid  
+# Ensure the NGINX PID file is owned by the nginx user
+RUN touch /var/run/nginx.pid && \
+    chown -R nginx:nginx /var/run/nginx.pid
 
-USER nginx  
+# Switch to the nginx user for security
+USER nginx
 
-EXPOSE 80  
+# Expose port 80
+EXPOSE 80
 
+# Start NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]  
