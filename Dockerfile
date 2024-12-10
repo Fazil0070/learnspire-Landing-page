@@ -1,22 +1,13 @@
-FROM node AS vite-app
+FROM node
 
 WORKDIR /app
 
 COPY . /app
 
-RUN ["npm", "i"]
-RUN ["npm", "run", "build"]
+RUN npm install
 
-FROM nginx:alpine
+# Expose the default Vite dev server port
+EXPOSE 5173
 
-WORKDIR /usr/share/nginx/
-
-RUN rm -rf html
-RUN mkdir html
-
-WORKDIR /
-
-COPY ./nginx/nginx.conf /nginx/nginx.conf
-COPY --from=vite-app ./app/dist /usr/share/nginx/html
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Start Vite dev server
+CMD ["npm", "run", "dev", "--", "--host"]
