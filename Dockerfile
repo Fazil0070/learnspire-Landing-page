@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the Vite development server's default port
-EXPOSE 5173
+EXPOSE 80
 
 # Run Vite in development mode with --host to allow external access
 CMD ["npm", "run", "dev", "--", "--host"]
