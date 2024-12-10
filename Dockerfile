@@ -1,20 +1,22 @@
-# Use Node.js as the base image
-FROM node:20-alpine
+FROM node AS vite-app
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json for dependency installation
-COPY package*.json ./
+COPY . /app
 
-# Install dependencies
-RUN npm install
+RUN ["npm", "i"]
+RUN ["npm", "run", "build"]
 
-# Copy all the project files into the container
-COPY . .
+FROM nginx:alpine
 
-# Expose the Vite development server's default port
-EXPOSE 80
+WORKDIR /usr/share/nginx/
 
-# Run Vite in development mode with --host to allow external access
-CMD ["npm", "run", "dev", "--", "--host"]
+RUN rm -rf html
+RUN mkdir html
+
+WORKDIR /
+
+COPY ./nginx/nginx.conf /nginx/nginx.conf
+COPY --from=vite-app ./app/dist /usr/share/nginx/html
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
