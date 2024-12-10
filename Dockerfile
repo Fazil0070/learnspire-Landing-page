@@ -1,13 +1,20 @@
-FROM node
+# Use Node.js as the base image
+FROM node:20-alpine
 
+# Set the working directory
 WORKDIR /app
 
-COPY . /app
+# Copy package.json and package-lock.json for dependency installation
+COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
-# Expose the default Vite dev server port
-EXPOSE 80
+# Copy all the project files into the container
+COPY . .
 
-# Start Vite dev server
+# Expose the Vite development server's default port
+EXPOSE 5173
+
+# Run Vite in development mode with --host to allow external access
 CMD ["npm", "run", "dev", "--", "--host"]
