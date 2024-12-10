@@ -1,12 +1,13 @@
-
-FROM node:21-alpine3.20 AS builder
+# build stage
+FROM node:20.11.0 as build-stage
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-FROM busybox:1.30 AS runner
-WORKDIR /app
-COPY --from=builder /app/dist .
-CMD ["busybox", "httpd", "-f", "-v", "-p", "8080"]
+# production stage
+FROM nginx:1.26.0-alpine as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /app
+COPY nginx.conf /etc/nginx/nginx.conf
