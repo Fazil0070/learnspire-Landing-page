@@ -16,7 +16,7 @@ RUN mkdir html
 
 WORKDIR /
 
-COPY ./nginx/nginx.conf /etc/nginx
+COPY ./nginx/nginx.conf /nginx/nginx.conf
 COPY --from=vite-app ./app/dist /usr/share/nginx/html
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
