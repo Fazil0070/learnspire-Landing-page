@@ -16,7 +16,7 @@ RUN rm -rf /usr/share/nginx/html
 RUN mkdir /usr/share/nginx/html
 
 # Copy the Nginx configuration file to the correct location
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx.conf
 
 # Copy the built app from the Vite build container to the Nginx html folder
 COPY --from=vite-app /app/dist /usr/share/nginx/html
