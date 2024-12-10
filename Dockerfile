@@ -6,7 +6,6 @@ COPY . /app
 
 RUN ["npm", "i"]
 RUN ["npm", "run", "build"]
-
 FROM nginx:alpine
 
 WORKDIR /usr/share/nginx/
