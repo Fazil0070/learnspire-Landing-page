@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Server, FlaskConical, Users, Activity, Code, Database } from 'lucide-react';
+import { Book, Server, FlaskConical, Users, Code, Database } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const ProductCard = ({ icon: Icon, title, description, iconBgColor, iconColor }) => (
@@ -67,7 +67,7 @@ const Products = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black pt-36 pb-20 px-4 relative overflow-hidden">
+    <div className=" font-Kanit min-h-screen bg-black pt-36 pb-20 px-4 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-500/5 to-transparent" />
       <div className="container mx-auto max-w-6xl relative z-10">
         <h1 className="text-center mb-10">

@@ -39,10 +39,10 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-black py-16 px-4">
-      <div className="container mx-auto max-w-6xl mt-10">
+      <div className=" font-Kanit container mx-auto max-w-6xl mt-10">
         {/* Hero Section */}
         <div className="text-center mb-20">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
+          <h1 className=" text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
             About Learnspire
           </h1>
           <p className="text-gray-400 mb-6">

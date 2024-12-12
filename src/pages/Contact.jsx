@@ -87,7 +87,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20">
+    <div className="font-Kanit min-h-screen bg-black text-white pt-20">
       <div className="max-w-6xl mx-auto p-8">
         {/* Header Section */}
         <div className="text-center mb-16">

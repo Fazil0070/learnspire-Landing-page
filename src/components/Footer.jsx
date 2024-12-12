@@ -47,9 +47,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white">
+    <footer className="font-Kanit bg-black text-white">
       {/* Newsletter Section */}
-      <div className="max-w-6xl mx-auto px-4 pt-16 pb-12">
+      <div className="font-Kanit max-w-6xl mx-auto px-4 pt-16 pb-12">
         <div className="bg-[#111] rounded-lg p-8 mb-16">
           <h2 className="text-3xl font-semibold mb-2">Join our newsletter</h2>
           <p className="text-gray-400 mb-6">For updates and special offers</p>

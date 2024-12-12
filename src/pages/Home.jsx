@@ -218,7 +218,7 @@ const Home = () => {
   }, [setupAnimations]);
 
   return (
-    <main className="mt-16">
+    <main className="font-Kanit mt-16" >
       <CursorFollower />
       <section className="min-h-screen w-full max-w-[100vw] relative flex flex-col overflow-hidden">
         <div className="flex flex-col min-h-screen w-full p-[5%] gap-6 place-content-center max-xl:place-items-center max-lg:p-4">
@@ -226,11 +226,11 @@ const Home = () => {
           <div className="hero-content flex flex-col place-content-center items-center">
             {/* Hero Title */}
             <h1 className="text-center text-6xl font-semibold uppercase leading-[80px] max-lg:text-4xl max-md:leading-snug">
-              <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="font-medium  bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Level Up Your Learning with
               </span>
               <br />
-              <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className=" font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 AI-Powered Solutions
               </span>
             </h1>

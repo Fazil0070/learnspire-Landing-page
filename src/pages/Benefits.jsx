@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rocket, Brain, BarChart, Gauge, Users, Shield, Sparkles } from 'lucide-react';
+import{ Brain, BarChart, Gauge, Users, Shield, Sparkles } from 'lucide-react';
 
 const BenefitCard = ({ icon: Icon, title, description }) => (
   <div className="bg-[#111] rounded-xl p-8 border border-gray-800 hover:border-gray-700 transition-colors">
@@ -47,7 +47,7 @@ const Benefits = () => {
 
   return (
     <section className="bg-black py-24">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="font-Kanit max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Key benefits</h2>
         </div>

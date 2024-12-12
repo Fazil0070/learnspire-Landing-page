@@ -188,7 +188,7 @@ const InsightsSection = () => {
   ];
 
   return (
-    <section className="w-full bg-black py-20 overflow-hidden" id="insights">
+    <section className="font-Kanit w-full bg-black py-20 overflow-hidden" id="insights">
       <div className="container mx-auto px-4 space-y-32">
         {/* First Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
