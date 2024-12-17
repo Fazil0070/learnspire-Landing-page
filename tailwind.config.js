@@ -10,6 +10,7 @@ export default {
       fontFamily:{
         'Raleway': ["Raleway", "serif"],
         'Kanit': ["Kanit", "sans-serif"],
+        'kamerik': ['Kamerik 205', 'sans-serif'],
       },
 
 

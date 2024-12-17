@@ -50,11 +50,11 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className=" w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M20 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V6C22 4.89543 21.1046 4 20 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      title: "Interactive Courses",
+      title: " Interactive Courses",
       description: "Engage learners with dynamic, adaptive content that evolves with their progress."
     },
     {
@@ -110,13 +110,13 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="w-full bg-black py-20" id="features">
+    <section className=" font-kamerik w-full bg-black py-20" id="features">
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16 reveal-up">
-          <h2 className="text-2xl font-bold mb-8 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h2 className="font-bold text-2xl mb-8 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
             Features loved by everyone
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="font-normal text-gray-400 max-w-2xl mx-auto">
             Discover the tools and features that make our platform the perfect choice for modern education
           </p>
         </div>
@@ -218,25 +218,25 @@ const Home = () => {
   }, [setupAnimations]);
 
   return (
-    <main className="font-Kanit mt-16" >
+    <main className="font-kamerik  font mt-16" >
       <CursorFollower />
       <section className="min-h-screen w-full max-w-[100vw] relative flex flex-col overflow-hidden">
         <div className="flex flex-col min-h-screen w-full p-[5%] gap-6 place-content-center max-xl:place-items-center max-lg:p-4">
           {/* Hero Content */}
           <div className="hero-content flex flex-col place-content-center items-center">
             {/* Hero Title */}
-            <h1 className="text-center text-6xl font-semibold uppercase leading-[80px] max-lg:text-4xl max-md:leading-snug">
-              <span className="font-medium  bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <h1 className="text-center text-4xl font-bold uppercase leading-[80px] max-lg:text-4xl max-md:leading-snug">
+              <span className="  bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Level Up Your Learning with
               </span>
               <br />
-              <span className=" font-medium bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className=" bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 AI-Powered Solutions
               </span>
             </h1>
             
             {/* Hero Description */}
-            <p className="mt-10 max-w-[450px] p-2 text-center text-gray-300">
+            <p className="font-thin mt-10 max-w-[450px] p-2 text-center text-gray-300">
               Experience a continuous improvement in learning outcomes with our AI-driven approach. 
               We adapt content delivery, assessment methods, and personalization strategies based on 
               real-time feedback for a more efficient learning journey.
@@ -246,7 +246,7 @@ const Home = () => {
             <div className="mt-10 flex place-items-center gap-4">
               <a
                 href="/contact"
-                className="bg-purple-600 px-6 py-3 rounded-full shadow-lg shadow-purple-500/50 transition-all duration-500 hover:scale-105 hover:shadow-purple-500/70 hover:bg-purple-500"
+                className="font-normal bg-purple-600 px-6 py-3 rounded-full shadow-lg shadow-purple-500/50 transition-all duration-500 hover:scale-105 hover:shadow-purple-500/70 hover:bg-purple-500"
               >
                 Contact Us
               </a>

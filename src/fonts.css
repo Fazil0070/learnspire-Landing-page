@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Bold Oblique.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Book.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Book Oblique.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Heavy.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Heavy Oblique.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Light Oblique.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Kamerik 205';
+    src: url('public/fonts/Kamerik 205 Thin Oblique.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
