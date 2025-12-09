@@ -104,7 +104,7 @@ const About = () => {
         </div>
 
         {/* Team Section */}
-        <div>
+        {/* <div>
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-12">
             Our Team
           </h2>
@@ -113,8 +113,8 @@ const About = () => {
               <TeamMember key={index} {...member} />
             ))}
           </div>
-        </div>
-        <Footer/>
+        </div> */}
+        <Footer />
       </div>
     </div>
   );

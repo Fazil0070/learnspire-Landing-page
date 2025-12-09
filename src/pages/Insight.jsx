@@ -6,13 +6,15 @@ import dashboard from '../assets/dashboard.png';
 import analysis from '../assets/analysis.png';
 import codingChallenges from '../assets/coding.png';
 import studentResults from '../assets/results.png';
+import prep from '../assets/prep.png';
+import communication from '../assets/communication.png';
 
 const InsightCard = ({ title, description }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
         <svg className="w-6 h-6 text-purple-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         <h3 className="text-xl font-semibold text-white">{title}</h3>
       </div>
@@ -103,11 +105,41 @@ const AnalysisImage = () => (
   </div>
 );
 
+const PrepDashboardImage = () => (
+  <div className="bg-[#0B1120] rounded-xl p-6">
+    <div className="flex justify-between items-center mb-6">
+      <h3 className="text-white text-lg font-semibold">Prep Dashboard</h3>
+    </div>
+    <div className="relative w-full h-full rounded-lg overflow-hidden">
+      <img
+        src={prep || ''}
+        alt="Prep Dashboard"
+        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+      />
+    </div>
+  </div>
+);
+
+const CommunicationImage = () => (
+  <div className="bg-[#0B1120] rounded-xl p-6">
+    <div className="flex justify-between items-center mb-6">
+      <h3 className="text-white text-lg font-semibold">Communication Test Suite</h3>
+    </div>
+    <div className="relative w-full h-full rounded-lg overflow-hidden">
+      <img
+        src={communication || ''}
+        alt="Communication Dashboard"
+        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+      />
+    </div>
+  </div>
+);
+
 const InsightsSection = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    ['first', 'second', 'third', 'fourth'].forEach((section) => {
+    ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'].forEach((section) => {
       gsap.fromTo(
         `.insights-dashboard-${section}`,
         { y: 100, opacity: 0 },
@@ -184,6 +216,40 @@ const InsightsSection = () => {
     {
       title: "Customizable Dashboards",
       description: "Create personalized views that highlight the most critical insights for your specific business needs and goals."
+    }
+  ];
+
+  const prepDashboardInsights = [
+    {
+      title: "Coding Assessment Module",
+      description: "Full coding test environment with sample inputs, expected outputs, and structured evaluation."
+    },
+    {
+      title: "Company-Specific Coding Prep",
+      description: "Curated programming challenges tailored for product & service-based companies."
+    },
+    {
+      title: "Technical Coding Practice Room",
+      description: "Daily problem-solving space designed to improve consistency and confidence."
+    }
+  ];
+
+  const lsrwInsights = [
+    {
+      title: "Listening Assessment",
+      description: "Audio-based comprehension with auto-evaluated responses."
+    },
+    {
+      title: "Speaking Evaluation",
+      description: "AI-assisted scoring for pronunciation, clarity, fluency, and coherence."
+    },
+    {
+      title: "Reading Comprehension",
+      description: "Timed passages with analytics on understanding and speed."
+    },
+    {
+      title: "Writing Assessment",
+      description: "Structured rubric-based evaluation for grammar, clarity, and composition."
     }
   ];
 
@@ -307,6 +373,68 @@ const InsightsSection = () => {
           <div className="relative order-1 lg:order-2">
             <div className="insights-dashboard-fourth relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20">
               <StudentResultsImage />
+              <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/30 rounded-full blur-[120px]" />
+              <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-pink-500/30 rounded-full blur-[120px]" />
+            </div>
+            <div className="absolute -top-10 -left-10 w-full h-full bg-gradient-to-br from-purple-500/10 to-transparent rounded-xl -z-10" />
+          </div>
+        </div>
+
+        {/* Fifth Section - Prep Dashboard */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="insights-dashboard-fifth relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20">
+              <PrepDashboardImage />
+              <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/30 rounded-full blur-[120px]" />
+              <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-pink-500/30 rounded-full blur-[120px]" />
+            </div>
+            <div className="absolute -top-10 -left-10 w-full h-full bg-gradient-to-br from-purple-500/10 to-transparent rounded-xl -z-10" />
+          </div>
+
+          <div className="order-1 lg:order-2 space-y-12 insights-content-fifth">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Prep Dashboard
+              </h2>
+              <p className="text-gray-400 max-w-xl">
+                A centralized preparation hub designed to help students build strong technical foundations and excel in company-specific coding challenges.
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {prepDashboardInsights.map((insight, index) => (
+                <div key={index}>
+                  <InsightCard {...insight} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Sixth Section - LSRW Communication Test Suite */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="order-1 space-y-12 insights-content-sixth">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                LSRW Communication Test Suite
+              </h2>
+              <p className="text-gray-400 max-w-xl">
+                Evaluate students' Listening, Speaking, Reading, and Writing skills with AI-driven accuracy and clear scoring rubrics.
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {lsrwInsights.map((insight, index) => (
+                <div key={index}>
+                  <InsightCard {...insight} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative order-2">
+            <div className="insights-dashboard-sixth relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20">
+              <CommunicationImage />
               <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/30 rounded-full blur-[120px]" />
               <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-pink-500/30 rounded-full blur-[120px]" />
             </div>
