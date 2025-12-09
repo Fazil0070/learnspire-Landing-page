@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from "@emailjs/browser";
-import { Facebook, Instagram, X } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +11,6 @@ const Footer = () => {
     { label: 'About us', href: '/about' },
     { label: 'Products', href: '/products' },
     { label: 'Contact Us', href: '/contact' },
-    { label: 'Login', href: '/login' },
   ];
 
   const handleSubmit = (e) => {
@@ -47,9 +46,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white">
+    <footer className="font-Kanit bg-black text-white">
       {/* Newsletter Section */}
-      <div className="max-w-6xl mx-auto px-4 pt-16 pb-12">
+      <div className="font-Kanit max-w-6xl mx-auto px-4 pt-16 pb-12">
         <div className="bg-[#111] rounded-lg p-8 mb-16">
           <h2 className="text-3xl font-semibold mb-2">Join our newsletter</h2>
           <p className="text-gray-400 mb-6">For updates and special offers</p>
@@ -101,25 +100,17 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-6">Follow us</h3>
             <div className="flex gap-6">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/learnspire-ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/learnspire-ai/', '_blank', 'noopener,noreferrer');
+                }}
                 className="text-gray-400 hover:text-white transition-colors duration-200"
-                aria-label="Facebook"
+                aria-label="LinkedIn"
               >
-                <Facebook className="w-6 h-6" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
-                aria-label="X"
-              >
-                <X className="w-6 h-6" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-6 h-6" />
+                <Linkedin className="w-6 h-6" />
               </a>
             </div>
           </div>

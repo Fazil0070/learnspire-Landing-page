@@ -54,7 +54,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4 py-12 overflow-hidden relative">
+    <div className="font-Kanit min-h-screen bg-black flex items-center justify-center px-4 py-12 overflow-hidden relative">
       {/* Subtle background effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-gray-900 opacity-90 z-0"></div>
       

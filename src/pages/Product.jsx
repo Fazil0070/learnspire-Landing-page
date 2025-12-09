@@ -1,9 +1,9 @@
 import React from 'react';
-import { Book, Server, FlaskConical, Users, Activity, Code, Database } from 'lucide-react';
+import { Book, Server, FlaskConical, Users, Code, Database } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const ProductCard = ({ icon: Icon, title, description, iconBgColor, iconColor }) => (
-  <div className="group relative overflow-hidden bg-[#0B1120] rounded-2xl shadow-lg border border-gray-800 transition-all duration-300 hover:shadow-purple-500/20 hover:-translate-y-2">
+  <div className="font-kamerik group relative overflow-hidden bg-[#0B1120] rounded-2xl shadow-lg border border-gray-800 transition-all duration-300 hover:shadow-purple-500/20 hover:-translate-y-2">
     <div className="p-6 space-y-4">
       <div
         className={`w-16 h-16 ${iconBgColor} ${iconColor} rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:rotate-6`}
@@ -67,7 +67,7 @@ const Products = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black pt-36 pb-20 px-4 relative overflow-hidden">
+    <div className=" font-Kamerik min-h-screen bg-black pt-36 pb-20 px-4 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-500/5 to-transparent" />
       <div className="container mx-auto max-w-6xl relative z-10">
         <h1 className="text-center mb-10">
