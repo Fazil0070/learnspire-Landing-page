@@ -4,6 +4,8 @@ import akashImage from "../assets/akash.jpeg";
 import fazilImage from "../assets/fazil.jpeg";
 import Footer from "../components/Footer";
 
+// Team Member component: Displays an individual team member's photo, name, and role
+// Photo is passed as the 'image' prop
 const TeamMember = ({ name, role, image }) => (
   <div className="font-kamerik group relative overflow-hidden bg-[#0B1120] rounded-xl p-6 border border-gray-800 transition-all duration-300 hover:shadow-purple-500/20 hover:-translate-y-2">
     <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />
@@ -18,7 +20,10 @@ const TeamMember = ({ name, role, image }) => (
   </div>
 );
 
+// About Page: Contains information about Learnspire and the team
 const About = () => {
+    // List of team members with their names, roles, and photos
+  // Photos are imported at the top of this file
   const teamMembers = [
     {
       name: "Aqeel Anaikar A",
@@ -103,18 +108,19 @@ const About = () => {
           </div>
         </div>
 
-        {/* Team Section */}
-        {/* <div>
-          <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-12">
+        {/* Team Section: Showcasing our team members and their photos */}
+        <div>
+          {/* <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-12">
             Our Team
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          </h2> */}
+          {/* Team Members List: Each member is rendered with their photo and details */}
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <TeamMember key={index} {...member} />
             ))}
-          </div>
-        </div> */}
-        <Footer />
+          </div> */}
+        </div>
+        <Footer/>
       </div>
     </div>
   );
