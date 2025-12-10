@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, LogIn, ChevronRight, Sparkles } from 'lucide-react';
+import { Menu, X, ChevronRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -36,10 +36,7 @@ const Header = () => {
     document.body.style.overflow = !isMenuOpen ? 'hidden' : 'unset';
   };
 
-  const handleLogin = () => {
-    navigate('/login');
-    if (isMenuOpen) toggleMenu();
-  };
+
 
   const menuItems = [
     { text: 'Home', path: '/', id: 'home' },
@@ -90,17 +87,6 @@ const Header = () => {
                   </motion.span>
                 </Link>
               ))}
-
-              {/* Login Button */}
-              <motion.button
-                onClick={handleLogin}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full font-medium flex items-center space-x-2 transition-all duration-300 ease-in-out shadow-sm hover:shadow-lg"
-              >
-                <LogIn size={18} />
-                <span>Login</span>
-              </motion.button>
             </div>
             {/* Mobile Menu Trigger */}
             <button
@@ -156,33 +142,16 @@ const Header = () => {
                       <Link
                         to={item.path}
                         onClick={toggleMenu}
-                        className={`flex items-center justify-between p-4 rounded-xl ${  
-                          activeSection === item.id  
-                            ? 'bg-white/10 text-white'  
-                            : 'text-gray-400 hover:bg-white/5'  
-                        } transition-all duration-300`}
+                        className={`flex items-center justify-between p-4 rounded-xl ${activeSection === item.id
+                            ? 'bg-white/10 text-white'
+                            : 'text-gray-400 hover:bg-white/5'
+                          } transition-all duration-300`}
                       >
                         <span className="font-medium">{item.text}</span>
                         <ChevronRight className="w-5 h-5" />
                       </Link>
                     </motion.div>
                   ))}
-
-                  {/* Mobile Login Button */}
-                  <motion.div
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: menuItems.length * 0.1 }}
-                    className="px-4 pt-6"
-                  >
-                    <button
-                      onClick={handleLogin}
-                      className="w-full py-3 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl font-medium flex items-center justify-center space-x-2 transition-all duration-300 ease-in-out"
-                    >
-                      <LogIn size={18} />
-                      <span>Login</span>
-                    </button>
-                  </motion.div>
                 </div>
               </div>
             </motion.div>

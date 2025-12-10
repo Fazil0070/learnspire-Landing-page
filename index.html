@@ -1,36 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Learnspire - Empower your learning journey with an advanced learning management system offering course videos, assessments, results tracking, and more." />
-    <meta name="keywords"
-          content="Learnspire, learnspire.ai, learning management system, LMS, online learning platform, e-learning software, digital learning platform, virtual classroom, course management system, educational technology, online education platform, learning portal, training management system, student management system, enterprise LMS, cloud-based LMS, interactive learning platform, remote learning solution, professional development platform, online course delivery, educational software, learning analytics, mobile learning platform, blended learning solution, corporate training platform, academic learning management, distance learning platform, personalized learning system, learnspire LMS, learnspire learning, learnspire education"/>
-    <meta name="author" content="Learnspire" />
 
-    <!-- SEO Meta Tags -->
-    <meta property="og:title" content="Learnspire - Your Learning Companion" />
-    <meta property="og:description" content="Explore Learnspire for a professional and user-friendly platform..." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://learnspire.ai/" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Learnspire - Empower your learning journey with an advanced learning management system offering course videos, assessments, results tracking, and more." />
+  <meta name="keywords"
+    content="Learnspire, learnspire.ai, learning management system, LMS, online learning platform, e-learning software, digital learning platform, virtual classroom, course management system, educational technology, online education platform, learning portal, training management system, student management system, enterprise LMS, cloud-based LMS, interactive learning platform, remote learning solution, professional development platform, online course delivery, educational software, learning analytics, mobile learning platform, blended learning solution, corporate training platform, academic learning management, distance learning platform, personalized learning system, learnspire LMS, learnspire learning, learnspire education" />
+  <meta name="author" content="Learnspire" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="src/assets/logo.png" />
-    <link rel="apple-touch-icon" href="src/assets/logo.png" />
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content="Learnspire - Your Learning Companion" />
+  <meta property="og:description" content="Explore Learnspire for a professional and user-friendly platform..." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://learnspire.ai/" />
+  <meta property="og:image" content="https://learnspire.ai/src/assets/logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Learnspire Logo" />
 
-    <!-- Preload Critical Assets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Learnspire - Your Learning Companion" />
+  <meta name="twitter:description" content="Explore Learnspire for a professional and user-friendly platform..." />
+  <meta name="twitter:image" content="https://learnspire.ai/src/assets/logo.png" />
 
-    <title>Learnspire - Advanced Learning Management System</title>
-    <link rel="canonical" href="https://learnspire.ai/" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="src/assets/logo.png" />
+  <link rel="apple-touch-icon" href="src/assets/logo.png" />
 
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.learnspire.ai;">
-  </head>
-  <body>
-    <div id="root"></div>
-    <noscript>You need to enable JavaScript to run this application.</noscript>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <!-- Preload Critical Assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <title>Learnspire - Advanced Learning Management System</title>
+  <link rel="canonical" href="https://learnspire.ai/" />
+
+  <!-- JSON-LD Structured Data for Search Engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Learnspire",
+    "url": "https://learnspire.ai",
+    "logo": "https://learnspire.ai/src/assets/logo.png",
+    "description": "Empower your learning journey with an advanced learning management system offering course videos, assessments, results tracking, and more.",
+    "sameAs": [
+      "https://www.linkedin.com/company/learnspire-ai/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "url": "https://learnspire.ai/contact"
+    }
+  }
+  </script>
+
+  <!-- Additional SEO Meta Tags -->
+  <meta property="og:site_name" content="Learnspire" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="msapplication-TileColor" content="#000000" />
+  <meta name="msapplication-TileImage" content="https://learnspire.ai/src/assets/logo.png" />
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.learnspire.ai https://api.emailjs.com;">
+</head>
+
+<body>
+  <div id="root"></div>
+  <noscript>You need to enable JavaScript to run this application.</noscript>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
