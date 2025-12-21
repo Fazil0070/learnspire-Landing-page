@@ -8,6 +8,7 @@ import codingChallenges from '../assets/coding.png';
 import studentResults from '../assets/results.png';
 import prep from '../assets/prep.png';
 import communication from '../assets/communication.png';
+import profile from '../assets/profile.png';
 
 const InsightCard = ({ title, description }) => {
   return (
@@ -73,22 +74,7 @@ const Dashboard = () => (
   </div>
 );
 
-const DemoContactSection = () => (
-  <div className="w-full text-center mt-16 space-y-4">
-    <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-      For Demo, Contact Us
-    </h2>
-    <p className="text-gray-400 max-w-2xl mx-auto">
-      Interested in seeing what our platform can do for you? Get in touch with us for a personalized demo.
-    </p>
-    <a
-      href="/contact"
-      className="bg-purple-600 text-white text-lg font-semibold py-4 px-8 rounded-full hover:bg-purple-700 transition duration-300 inline-block"
-    >
-      Contact Us
-    </a>
-  </div>
-);
+
 
 const AnalysisImage = () => (
   <div className="bg-[#0B1120] rounded-xl p-6">
@@ -135,11 +121,26 @@ const CommunicationImage = () => (
   </div>
 );
 
+const PMSImage = () => (
+  <div className="bg-[#0B1120] rounded-xl p-6">
+    <div className="flex justify-between items-center mb-6">
+      <h3 className="text-white text-lg font-semibold">Profile Management Dashboard</h3>
+    </div>
+    <div className="relative w-full h-full rounded-lg overflow-hidden">
+      <img
+        src={profile || ''}
+        alt="Profile Management System"
+        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+      />
+    </div>
+  </div>
+);
+
 const InsightsSection = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'].forEach((section) => {
+    ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh'].forEach((section) => {
       gsap.fromTo(
         `.insights-dashboard-${section}`,
         { y: 100, opacity: 0 },
@@ -250,6 +251,17 @@ const InsightsSection = () => {
     {
       title: "Writing Assessment",
       description: "Structured rubric-based evaluation for grammar, clarity, and composition."
+    }
+  ];
+
+  const pmsInsights = [
+    {
+      title: "Comprehensive Student Profiling",
+      description: "Students can easily fill and update their personal, academic, and professional details in a structured format."
+    },
+    {
+      title: "Admin Data Management",
+      description: "Admins have full control to view, manage, and download comprehensive student data reports for administrative use."
     }
   ];
 
@@ -442,7 +454,36 @@ const InsightsSection = () => {
           </div>
         </div>
 
-        <DemoContactSection />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="insights-dashboard-seventh relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20">
+              <PMSImage />
+              <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/30 rounded-full blur-[120px]" />
+              <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-pink-500/30 rounded-full blur-[120px]" />
+            </div>
+            <div className="absolute -top-10 -left-10 w-full h-full bg-gradient-to-br from-purple-500/10 to-transparent rounded-xl -z-10" />
+          </div>
+
+          <div className="order-1 lg:order-2 space-y-12 insights-content-seventh">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Profile Management System (PMS)
+              </h2>
+              <p className="text-gray-400 max-w-xl">
+                A robust profile management system ensuring seamless data collection and administrative control.
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {pmsInsights.map((insight, index) => (
+                <div key={index}>
+                  <InsightCard {...insight} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

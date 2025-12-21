@@ -9,174 +9,6 @@ import Benefits from './Benefits';
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Loading Screen Component
-const LoadingScreen = ({ onLoadingComplete }) => {
-  const [progress, setProgress] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, 30);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (progress === 100) {
-      // Wait a bit before fading out
-      setTimeout(() => {
-        gsap.to('.loading-screen', {
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.inOut',
-          onComplete: () => {
-            setIsVisible(false);
-            if (onLoadingComplete) onLoadingComplete();
-          }
-        });
-      }, 500);
-    }
-  }, [progress, onLoadingComplete]);
-
-  useEffect(() => {
-    // Animate letters appearing one by one
-    const letters = document.querySelectorAll('.letter');
-    gsap.fromTo(
-      letters,
-      { opacity: 0, y: 50, rotateX: -90 },
-      {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
-        delay: 0.3
-      }
-    );
-
-    // Animate the tagline
-    gsap.fromTo(
-      '.loading-tagline',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 1, delay: 2, ease: 'power3.out' }
-    );
-
-    // Animate progress bar container
-    gsap.fromTo(
-      '.progress-container',
-      { opacity: 0, scaleX: 0 },
-      { opacity: 1, scaleX: 1, duration: 0.8, delay: 1.5, ease: 'power3.out' }
-    );
-  }, []);
-
-  if (!isVisible) return null;
-
-  const logoText = 'LearnSpire';
-
-  return (
-    <div className="loading-screen fixed inset-0 z-[9999] flex items-center justify-center bg-black overflow-hidden">
-      {/* Animated background particles */}
-      <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-purple-500 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-              opacity: Math.random() * 0.5 + 0.3
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-[150px] animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/30 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '1s' }} />
-
-      {/* Main content */}
-      <div className="relative z-10 text-center px-4">
-        {/* Logo text with letter animation */}
-        <div className="mb-8 flex justify-center gap-1 perspective-1000">
-          {logoText.split('').map((letter, index) => (
-            <span
-              key={index}
-              className="letter inline-block text-6xl md:text-8xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-              style={{
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}
-            >
-              {letter}
-            </span>
-          ))}
-        </div>
-
-        {/* Tagline */}
-        <p className="loading-tagline text-gray-400 text-lg md:text-xl mb-12 font-light">
-          Empowering Education with AI
-        </p>
-
-        {/* Progress bar */}
-        <div className="progress-container w-64 md:w-96 mx-auto">
-          <div className="relative h-2 bg-gray-800 rounded-full overflow-hidden">
-            <div
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-300 ease-out"
-              style={{ width: `${progress}%` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
-            </div>
-          </div>
-          <div className="mt-4 text-purple-400 text-sm font-semibold">
-            {progress}%
-          </div>
-        </div>
-      </div>
-
-      {/* CSS animations */}
-      <style jsx>{`
-        @keyframes gradient-shift {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-
-        .animate-shimmer {
-          animation: shimmer 2s infinite;
-        }
-
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-      `}</style>
-    </div>
-  );
-};
-
-
 // Animated Star Field Component
 const StarField = () => {
   const [stars, setStars] = useState([]);
@@ -324,72 +156,14 @@ const ScrollProgress = () => {
   );
 };
 
-// Enhanced Cursor Follower with Trail and Ripple
-const CursorFollower = () => {
-  const [ripples, setRipples] = useState([]);
 
-  useEffect(() => {
-    const updateCursor = (e) => {
-      gsap.to('.cursor-follower', {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.6,
-        ease: 'power3.out'
-      });
-
-      // Update trail
-      gsap.to('.cursor-trail', {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.9,
-        ease: 'power3.out'
-      });
-    };
-
-    const handleClick = (e) => {
-      const newRipple = {
-        id: Date.now(),
-        x: e.clientX,
-        y: e.clientY
-      };
-      setRipples(prev => [...prev, newRipple]);
-      setTimeout(() => {
-        setRipples(prev => prev.filter(r => r.id !== newRipple.id));
-      }, 1000);
-    };
-
-    window.addEventListener('mousemove', updateCursor);
-    window.addEventListener('click', handleClick);
-    return () => {
-      window.removeEventListener('mousemove', updateCursor);
-      window.removeEventListener('click', handleClick);
-    };
-  }, []);
-
-  return (
-    <>
-      {/* Cursor trail */}
-      <div className="cursor-trail fixed w-12 h-12 rounded-full bg-purple-500/20 pointer-events-none blur-md z-49 -translate-x-1/2 -translate-y-1/2" />
-      {/* Main cursor */}
-      <div className="cursor-follower fixed w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 pointer-events-none blur-sm z-50 -translate-x-1/2 -translate-y-1/2" />
-      {/* Click ripples */}
-      {ripples.map(ripple => (
-        <div
-          key={ripple.id}
-          className="fixed w-4 h-4 rounded-full border-2 border-purple-500 pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 animate-ping"
-          style={{ left: ripple.x, top: ripple.y }}
-        />
-      ))}
-    </>
-  );
-};
 
 // Tech Stack Marquee Component
 const TechStackMarquee = () => {
   const techStack = {
-    row1: ['React', 'Node.js', 'MongoDB', 'Express', 'TailwindCSS', 'GSAP', 'WebRTC', 'Socket.io'],
-    row2: ['Python', 'TensorFlow', 'OpenAI', 'Docker', 'AWS', 'Redis', 'PostgreSQL', 'GraphQL'],
-    row3: ['TypeScript', 'Next.js', 'Prisma', 'Stripe', 'Firebase', 'Vercel', 'GitHub Actions', 'Jest']
+    row1: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Vite'],
+    row2: ['Tailwind CSS', 'Shadcn', 'PostgreSQL', 'SQL', 'Docker'],
+    row3: ['Spring Boot', 'Java', 'GitHub', 'Coolify', 'Hetzner']
   };
 
   useEffect(() => {
@@ -401,13 +175,14 @@ const TechStackMarquee = () => {
   }, []);
 
   const MarqueeRow = ({ items, direction = 'left', speed = 30 }) => {
-    // Duplicate items for seamless loop
-    const duplicatedItems = [...items, ...items, ...items];
+    // Duplicate items for seamless loop 
+    // Increased duplication to ensure no gaps on wider screens or fast scrolls
+    const duplicatedItems = [...items, ...items, ...items, ...items];
 
     return (
-      <div className="relative overflow-hidden py-4">
+      <div className="relative overflow-hidden py-2 md:py-4">
         <div
-          className="flex gap-8 whitespace-nowrap"
+          className="flex gap-4 md:gap-8 whitespace-nowrap will-change-transform transform-gpu"
           style={{
             animation: `marquee-${direction} ${speed}s linear infinite`,
           }}
@@ -415,9 +190,9 @@ const TechStackMarquee = () => {
           {duplicatedItems.map((tech, index) => (
             <div
               key={`${tech}-${index}`}
-              className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center px-4 py-2 md:px-6 md:py-3 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 backdrop-blur-none md:backdrop-blur-sm hover:border-purple-500/60 transition-all duration-300 transform-gpu"
             >
-              <span className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="text-sm md:text-lg font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 {tech}
               </span>
             </div>
@@ -462,19 +237,321 @@ const TechStackMarquee = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-33.333%);
+            transform: translateX(-25%);
           }
         }
 
         @keyframes marquee-right {
           0% {
-            transform: translateX(-33.333%);
+            transform: translateX(-25%);
           }
           100% {
             transform: translateX(0);
           }
         }
+
+        @keyframes flow-animation {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        
+        @keyframes energy-beam {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
+        @keyframes energy-beam-vertical {
+          0% {
+            background-position: 0 -200%;
+          }
+          100% {
+            background-position: 0 200%;
+          }
+        }
       `}</style>
+    </section>
+  );
+};
+
+// Process Flowchart Component
+const ProcessFlowchart = () => {
+  const steps = [
+    {
+      id: 1,
+      title: "Onboard",
+      icon: "rocket",
+      description: "PMS: Profile Creation & Setup"
+    },
+    {
+      id: 2,
+      title: "Learn",
+      icon: "book",
+      description: "LMS: AI-Driven Coursework"
+    },
+    {
+      id: 3,
+      title: "Practice",
+      icon: "code",
+      description: "Coding Challenges & Labs"
+    },
+    {
+      id: 4,
+      title: "Assess",
+      icon: "clipboard",
+      description: "AMS: Tests & LSRW Evaluation"
+    },
+    {
+      id: 5,
+      title: "Analyze",
+      icon: "chart",
+      description: "Performance Insights & Growth"
+    }
+  ];
+
+  return (
+    <section className="process-flowchart py-24 px-4 bg-black relative overflow-hidden">
+      {/* Background Grid */}
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `linear-gradient(to right, #4f46e5 1px, transparent 1px), linear-gradient(to bottom, #4f46e5 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+          maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%)'
+        }}
+      />
+
+      <div className="container mx-auto relative z-10">
+        <div className="text-center mb-20">
+          <h2 className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-6 py-2 leading-relaxed">
+            The Learnspire Ecology
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            A seamless journey from onboarding to mastery, powered by integrated intelligent systems.
+          </p>
+        </div>
+
+        <div className="relative">
+          {/* Connecting Line (Desktop) */}
+          <div className="hidden md:block absolute top-1/2 left-0 w-full h-[3px] bg-gray-900 -translate-y-1/2 z-0 overflow-hidden">
+            {/* Energy Beam */}
+            <div
+              className="absolute inset-0 w-full h-full opacity-70"
+              style={{
+                background: 'linear-gradient(90deg, transparent, #9333ea, #fff, #9333ea, transparent)',
+                backgroundSize: '50% 100%',
+                animation: 'energy-beam 2s linear infinite'
+              }}
+            />
+            {/* Glow overlay */}
+            <div
+              className="absolute inset-0 w-full h-full blur-[4px] opacity-50"
+              style={{
+                background: 'linear-gradient(90deg, transparent, #a855f7, #fff, #a855f7, transparent)',
+                backgroundSize: '50% 100%',
+                animation: 'energy-beam 2s linear infinite'
+              }}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
+            {steps.map((step, index) => (
+              <div
+                key={step.id}
+                className="group relative flex flex-col items-center"
+              >
+                {/* Step Node */}
+                <div className="w-20 h-20 rounded-2xl bg-zinc-900 border border-purple-500/30 flex items-center justify-center relative z-10 group-hover:border-purple-500 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent rounded-2xl" />
+
+                  {/* Icons based on type */}
+                  {step.icon === 'rocket' && (
+                    <svg className="w-8 h-8 text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  )}
+                  {step.icon === 'book' && (
+                    <svg className="w-8 h-8 text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  )}
+                  {step.icon === 'code' && (
+                    <svg className="w-8 h-8 text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                  )}
+                  {step.icon === 'clipboard' && (
+                    <svg className="w-8 h-8 text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                  )}
+                  {step.icon === 'chart' && (
+                    <svg className="w-8 h-8 text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  )}
+
+                  {/* Step Number Badge */}
+                  <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gray-900 border border-purple-500/50 flex items-center justify-center text-sm font-bold text-white z-20 shadow-[0_0_10px_rgba(168,85,247,0.5)]">
+                    {step.id}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="mt-8 text-center bg-zinc-900/50 backdrop-blur-sm p-4 rounded-xl border border-white/5 w-full transition-colors group-hover:border-purple-500/30">
+                  <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-gray-400 group-hover:text-gray-300">
+                    {step.description}
+                  </p>
+                </div>
+
+                {/* Mobile Connector */}
+                {index !== steps.length - 1 && (
+                  <div className="md:hidden w-[3px] h-14 bg-gray-900 my-2 relative overflow-hidden">
+                    <div
+                      className="absolute inset-0 w-full h-full opacity-70"
+                      style={{
+                        background: 'linear-gradient(180deg, transparent, #9333ea, #fff, #9333ea, transparent)',
+                        backgroundSize: '100% 50%',
+                        animation: 'energy-beam-vertical 2s linear infinite'
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+// Highlights Section Component with Spotlight Effect
+const HighlightsSection = () => {
+  const highlights = [
+    {
+      title: "Custom Branding",
+      description: "Fully customizable interface to seamlessly match your unique brand identity.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+      ),
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Open Source Core",
+      description: "Built on transparent, community-driven open source technologies for ultimate flexibility.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+      ),
+      gradient: "from-emerald-500 to-green-500"
+    },
+    {
+      title: "Fully Secured",
+      description: "Enterprise-grade security protocols ensuring your data remains protected at all times.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      title: "Zero Downtime",
+      description: "Reliable, redundant infrastructure guarantees 99.99% uptime for your critical operations.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      gradient: "from-orange-500 to-red-500"
+    }
+  ];
+
+  const handleMouseMove = (e) => {
+    const cards = document.getElementsByClassName("highlight-card");
+    for (const card of cards) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    }
+  };
+
+  return (
+    <section
+      className="highlights-section py-24 px-4 relative overflow-hidden bg-black"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Grid Background */}
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
+        }}
+      />
+
+      {/* Ambient Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white mb-4">
+            Why Choose Learnspire?
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            Experience the next evolution of educational technology
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {highlights.map((item, index) => (
+            <div
+              key={index}
+              className="highlight-card group relative rounded-xl border border-white/10 bg-zinc-900/50 px-8 py-10 overflow-hidden transition-colors hover:border-white/20"
+            >
+              {/* Spotlight Effect Layer */}
+              <div
+                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+                style={{
+                  background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)`,
+                }}
+              />
+
+              <div className="relative z-10">
+                <div className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${item.gradient} bg-opacity-10 mb-6 group-hover:scale-110 transition-transform duration-300 ring-1 ring-white/10`}>
+                  <div className="text-white">
+                    {item.icon}
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-semibold text-white mb-3 tracking-tight group-hover:text-purple-200 transition-colors">
+                  {item.title}
+                </h3>
+
+                <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
@@ -692,16 +769,32 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        {/* Background decorations */}
-        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-[120px] -z-10" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-pink-500/20 rounded-full blur-[120px] -z-10" />
       </div>
     </section>
   );
 };
 
+
+// Demo Contact Section Component
+const DemoContactSection = () => (
+  <div className="w-full text-center py-20 bg-black space-y-4">
+    <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+      For Demo, Contact Us
+    </h2>
+    <p className="text-gray-400 max-w-2xl mx-auto">
+      Interested in seeing what our platform can do for you? Get in touch with us for a personalized demo.
+    </p>
+    <a
+      href="/contact"
+      className="bg-purple-600 text-white text-lg font-semibold py-4 px-8 rounded-full hover:bg-purple-700 transition duration-300 inline-block"
+    >
+      Contact Us
+    </a>
+  </div>
+);
+
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
+
 
   const setupAnimations = useCallback(() => {
     // Initial page load animation
@@ -784,8 +877,7 @@ const Home = () => {
 
   return (
     <>
-      {/* Loading Screen */}
-      {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
+
 
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
@@ -795,7 +887,7 @@ const Home = () => {
 
       {/* Main Content */}
       <main className="font-kamerik  font mt-16" >
-        <CursorFollower />
+
         <section className="hero-section min-h-screen w-full max-w-[100vw] relative flex flex-col overflow-hidden">
           {/* Animated Background Layers */}
           <StarField />
@@ -812,19 +904,19 @@ const Home = () => {
               {/* Hero Title */}
               <h1 className="text-center text-4xl font-bold uppercase leading-[80px] max-lg:text-4xl max-md:leading-snug">
                 <span className="  bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                  Level Up Your Learning with
+                  The Complete AI-Powered
                 </span>
                 <br />
                 <span className=" bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                  AI-Powered Solutions
+                  LMS, AMS & PMS Ecosystem
                 </span>
               </h1>
 
               {/* Hero Description */}
-              <p className="font-thin mt-10 max-w-[450px] p-2 text-center text-gray-300">
-                Experience a continuous improvement in learning outcomes with our AI-driven approach.
-                We adapt content delivery, assessment methods, and personalization strategies based on
-                real-time feedback for a more efficient learning journey.
+              <p className="font-thin mt-10 max-w-[650px] p-2 text-center text-gray-300">
+                Unify learning, assessment, and profile management with our advanced ecosystem.
+                From AI-driven coding challenges and LSRW communication suites to comprehensive student profiling
+                and analytics—empower your institution with a secure, open-source solution tailored for success.
               </p>
 
               {/* CTA Buttons */}
@@ -859,11 +951,20 @@ const Home = () => {
         {/* Tech Stack Marquee Section */}
         <TechStackMarquee />
 
+        {/* Highlights Section */}
+        <HighlightsSection />
+
         {/* Features Section */}
         <FeaturesSection />
         <Benefits />
         {/* Insights Section */}
         <InsightsSection />
+
+        {/* Process Flowchart Section */}
+        <ProcessFlowchart />
+
+        <DemoContactSection />
+
         <Footer />
 
       </main>
