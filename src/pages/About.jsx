@@ -4,8 +4,6 @@ import akashImage from "../assets/akash.jpeg";
 import fazilImage from "../assets/fazil.jpeg";
 import Footer from "../components/Footer";
 
-// Team Member component: Displays an individual team member's photo, name, and role
-// Photo is passed as the 'image' prop
 const TeamMember = ({ name, role, image }) => (
   <div className="font-kamerik group relative overflow-hidden bg-[#0B1120] rounded-xl p-6 border border-gray-800 transition-all duration-300 hover:shadow-purple-500/20 hover:-translate-y-2">
     <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-[120px]" />
@@ -20,10 +18,7 @@ const TeamMember = ({ name, role, image }) => (
   </div>
 );
 
-// About Page: Contains information about Learnspire and the team
 const About = () => {
-    // List of team members with their names, roles, and photos
-  // Photos are imported at the top of this file
   const teamMembers = [
     {
       name: "Aqeel Anaikar A",
@@ -47,42 +42,35 @@ const About = () => {
       <div className=" font-Kanit container mx-auto max-w-6xl mt-10">
         {/* Hero Section */}
         <div className="text-center mb-20">
-          <h1 className=" font-bold text-3xl md:text-5xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
+          <h1 className="font-bold text-3xl md:text-5xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
             ABOUT LEARNSPIRE
           </h1>
-          <p className="font-thin text-gray-400 mb-6">
-            Learnspire is dedicated to revolutionizing education through
-            innovative learning solutions.
+          <p className="text-gray-300 text-lg mb-6 max-w-3xl mx-auto">
+            Learnspire is dedicated to revolutionizing education through innovative learning solutions.
           </p>
-          <p className=" text-gray-400">
-            Our platform is designed to empower learners, educators, and
-            institutions with cutting-edge tools to achieve their full
-            potential in the modern world.
+          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+            Our platform is designed to empower learners, educators, and institutions with cutting-edge tools to achieve their full potential in the modern world.
           </p>
         </div>
 
         {/* Mission, Vision, and Values */}
         <div className="font-kamerik grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-20">
           <div className="bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-300">
-            <h3 className=" text-xl font-semibold text-white mb-4">Our Mission</h3>
-            <p className="font-thin text-gray-400">
-              To bridge the gap between traditional education and emerging
-              technologies by offering accessible, engaging, and impactful
-              learning solutions.
+            <h3 className="text-xl font-semibold text-white mb-4">Our Mission</h3>
+            <p className="text-gray-300">
+              To bridge the gap between traditional education and emerging technologies by offering accessible, engaging, and impactful learning solutions.
             </p>
           </div>
           <div className="font-kamerik bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-pink-500/20 hover:-translate-y-2 transition-all duration-300">
             <h3 className="font-semibold text-xl text-white mb-4">Our Vision</h3>
-            <p className="font-thin text-gray-400 ">
-              To create a world where education knows no bounds and learning
-              becomes a lifelong journey of discovery and growth.
+            <p className="text-gray-300">
+              To create a world where education knows no bounds and learning becomes a lifelong journey of discovery and growth.
             </p>
           </div>
           <div className="bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-300">
-            <h3 className="font-bold text-xl  text-white mb-4">Our Values</h3>
-            <p className="font-thin text-gray-400">
-              Innovation, integrity, inclusivity, and excellence guide every
-              step we take in transforming education.
+            <h3 className="font-bold text-xl text-white mb-4">Our Values</h3>
+            <p className="text-gray-300">
+              Innovation, integrity, inclusivity, and excellence guide every step we take in transforming education.
             </p>
           </div>
         </div>
@@ -108,19 +96,18 @@ const About = () => {
           </div>
         </div>
 
-        {/* Team Section: Showcasing our team members and their photos */}
-        <div>
-          {/* <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-12">
+        {/* Team Section */}
+        {/* <div>
+          <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-12">
             Our Team
-          </h2> */}
-          {/* Team Members List: Each member is rendered with their photo and details */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <TeamMember key={index} {...member} />
             ))}
-          </div> */}
-        </div>
-        <Footer/>
+          </div>
+        </div> */}
+        <Footer />
       </div>
     </div>
   );

@@ -143,8 +143,8 @@ const Header = () => {
                         to={item.path}
                         onClick={toggleMenu}
                         className={`flex items-center justify-between p-4 rounded-xl ${activeSection === item.id
-                            ? 'bg-white/10 text-white'
-                            : 'text-gray-400 hover:bg-white/5'
+                          ? 'bg-white/10 text-white'
+                          : 'text-gray-400 hover:bg-white/5'
                           } transition-all duration-300`}
                       >
                         <span className="font-medium">{item.text}</span>
