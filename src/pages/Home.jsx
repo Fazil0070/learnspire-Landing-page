@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import dashboard from '../assets/dashboard.png';
+
 import InsightsSection from './Insight';
 import Footer from '../components/Footer';
 import Benefits from './Benefits';
@@ -303,7 +303,7 @@ const ProcessFlowchart = () => {
     },
     {
       id: 4,
-      title: "Assess",
+      title: "Assessment",
       icon: "clipboard",
       description: "AMS: Tests & LSRW Evaluation"
     },
@@ -316,7 +316,7 @@ const ProcessFlowchart = () => {
   ];
 
   return (
-    <section className="process-flowchart py-24 px-4 bg-black relative overflow-hidden">
+    <section className="process-flowchart py-10 px-4 relative overflow-hidden">
       {/* Background Grid */}
       <div
         className="absolute inset-0 opacity-10"
@@ -364,7 +364,7 @@ const ProcessFlowchart = () => {
             {steps.map((step, index) => (
               <div
                 key={step.id}
-                className="group relative flex flex-col items-center"
+                className="group relative flex flex-col items-center h-full"
               >
                 {/* Step Node */}
                 <div className="w-20 h-20 rounded-2xl bg-zinc-900 border border-purple-500/30 flex items-center justify-center relative z-10 group-hover:border-purple-500 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300">
@@ -404,7 +404,7 @@ const ProcessFlowchart = () => {
                 </div>
 
                 {/* Content */}
-                <div className="mt-8 text-center bg-zinc-900/50 backdrop-blur-sm p-4 rounded-xl border border-white/5 w-full transition-colors group-hover:border-purple-500/30">
+                <div className="mt-8 text-center bg-zinc-900/50 backdrop-blur-sm p-4 rounded-xl border border-white/5 w-full transition-colors group-hover:border-purple-500/30 flex-1 flex flex-col justify-center">
                   <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
                   <p className="text-sm text-gray-400 group-hover:text-gray-300">
                     {step.description}
@@ -804,31 +804,7 @@ const Home = () => {
       { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
     );
 
-    // Hero image animations
-    gsap.fromTo(
-      '.hero-image-container',
-      {
-        scale: 0.8,
-        opacity: 0,
-        rotate: -5
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        rotate: 0,
-        duration: 1.5,
-        ease: 'power3.out',
-      }
-    );
 
-    // Floating animation with smooth easing
-    gsap.to('.hero-image-container', {
-      y: 20,
-      duration: 2.5,
-      ease: 'power1.inOut',
-      yoyo: true,
-      repeat: -1
-    });
 
     // Feature cards stagger animation with smooth reveal
     gsap.utils.toArray('.feature-card').forEach((card, index) => {
@@ -930,20 +906,9 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Hero Image Section */}
-            <div className="hero-image-container relative mt-8 flex w-full place-content-center place-items-center">
-              <div className="relative max-w-[80%] overflow-hidden rounded-xl bg-transparent max-md:max-w-full">
-                <img
-                  src={dashboard}
-                  alt="Dashboard preview"
-                  className="w-full h-full object-cover opacity-90 max-lg:object-contain transition-transform duration-300 hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div
-                className="purple-glow absolute left-[20%] top-5 h-52 w-52 bg-purple-500/30 blur-[100px]"
-                aria-hidden="true"
-              />
+            {/* Ecology Section (Process Flowchart) */}
+            <div className="w-full mt-8">
+              <ProcessFlowchart />
             </div>
           </div>
         </section>
@@ -960,8 +925,7 @@ const Home = () => {
         {/* Insights Section */}
         <InsightsSection />
 
-        {/* Process Flowchart Section */}
-        <ProcessFlowchart />
+
 
         <DemoContactSection />
 
