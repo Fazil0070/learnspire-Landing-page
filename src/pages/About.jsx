@@ -42,42 +42,35 @@ const About = () => {
       <div className=" font-Kanit container mx-auto max-w-6xl mt-10">
         {/* Hero Section */}
         <div className="text-center mb-20">
-          <h1 className=" font-bold text-3xl md:text-5xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
+          <h1 className="font-bold text-3xl md:text-5xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
             ABOUT LEARNSPIRE
           </h1>
-          <p className="font-thin text-gray-400 mb-6">
-            Learnspire is dedicated to revolutionizing education through
-            innovative learning solutions.
+          <p className="text-gray-300 text-lg mb-6 max-w-3xl mx-auto">
+            Learnspire is dedicated to revolutionizing education through innovative learning solutions.
           </p>
-          <p className=" text-gray-400">
-            Our platform is designed to empower learners, educators, and
-            institutions with cutting-edge tools to achieve their full
-            potential in the modern world.
+          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+            Our platform is designed to empower learners, educators, and institutions with cutting-edge tools to achieve their full potential in the modern world.
           </p>
         </div>
 
         {/* Mission, Vision, and Values */}
         <div className="font-kamerik grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-20">
           <div className="bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-300">
-            <h3 className=" text-xl font-semibold text-white mb-4">Our Mission</h3>
-            <p className="font-thin text-gray-400">
-              To bridge the gap between traditional education and emerging
-              technologies by offering accessible, engaging, and impactful
-              learning solutions.
+            <h3 className="text-xl font-semibold text-white mb-4">Our Mission</h3>
+            <p className="text-gray-300">
+              To bridge the gap between traditional education and emerging technologies by offering accessible, engaging, and impactful learning solutions.
             </p>
           </div>
           <div className="font-kamerik bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-pink-500/20 hover:-translate-y-2 transition-all duration-300">
             <h3 className="font-semibold text-xl text-white mb-4">Our Vision</h3>
-            <p className="font-thin text-gray-400 ">
-              To create a world where education knows no bounds and learning
-              becomes a lifelong journey of discovery and growth.
+            <p className="text-gray-300">
+              To create a world where education knows no bounds and learning becomes a lifelong journey of discovery and growth.
             </p>
           </div>
           <div className="bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-300">
-            <h3 className="font-bold text-xl  text-white mb-4">Our Values</h3>
-            <p className="font-thin text-gray-400">
-              Innovation, integrity, inclusivity, and excellence guide every
-              step we take in transforming education.
+            <h3 className="font-bold text-xl text-white mb-4">Our Values</h3>
+            <p className="text-gray-300">
+              Innovation, integrity, inclusivity, and excellence guide every step we take in transforming education.
             </p>
           </div>
         </div>
