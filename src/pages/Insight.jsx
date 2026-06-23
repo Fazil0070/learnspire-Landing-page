@@ -9,17 +9,21 @@ import studentResults from '../assets/results.png';
 import prep from '../assets/prep.png';
 import communication from '../assets/communication.png';
 import profile from '../assets/profile.png';
+import prepresult from '../assets/prepresult.png';
+import performance from '../assets/performance.png';
 
 const InsightCard = ({ title, description }) => {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <svg className="w-6 h-6 text-purple-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <h3 className="text-xl font-semibold text-white">{title}</h3>
+    <div className="group flex flex-col gap-3 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10">
+      <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 group-hover:bg-purple-500/30 group-hover:text-purple-300 transition-colors">
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-bold text-white tracking-tight">{title}</h3>
       </div>
-      <p className="text-gray-400 pl-8">{description}</p>
+      <p className="text-zinc-400 leading-relaxed pl-[3.25rem] group-hover:text-zinc-300 transition-colors">{description}</p>
     </div>
   );
 };
@@ -30,107 +34,135 @@ InsightCard.propTypes = {
 };
 
 const CodingChallengesImage = () => (
-  <div className="bg-[#0B1120] rounded-xl p-6">
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-lg font-semibold">Coding Challenges Dashboard</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Coding Challenges Dashboard</h3>
     </div>
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={codingChallenges || ''}
         alt="Coding Challenges Dashboard"
-        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
   </div>
 );
 
 const StudentResultsImage = () => (
-  <div className="bg-[#0B1120] rounded-xl p-6">
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-lg font-semibold">Student Performance Dashboard</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Student Performance Dashboard</h3>
     </div>
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={studentResults || ''}
         alt="Student Results Dashboard"
-        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
   </div>
 );
 
 const Dashboard = () => (
-  <div className="bg-[#0B1120] rounded-xl p-6">
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-lg font-semibold">Dashboard</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Dashboard</h3>
     </div>
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={dashboard || ''}
         alt="Dashboard"
-        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
   </div>
 );
 
-
-
 const AnalysisImage = () => (
-  <div className="bg-[#0B1120] rounded-xl p-6">
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-lg font-semibold">Analysis Overview</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Analysis Overview</h3>
     </div>
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={analysis || ''}
         alt="Analysis Dashboard"
-        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
   </div>
 );
 
 const PrepDashboardImage = () => (
-  <div className="bg-[#0B1120] rounded-xl p-6">
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-lg font-semibold">Prep Dashboard</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Prep Dashboard</h3>
     </div>
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={prep || ''}
         alt="Prep Dashboard"
-        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
   </div>
 );
 
 const CommunicationImage = () => (
-  <div className="bg-[#0B1120] rounded-xl p-6">
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-lg font-semibold">Communication Test Suite</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Communication Test Suite</h3>
     </div>
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={communication || ''}
         alt="Communication Dashboard"
-        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
   </div>
 );
 
 const PMSImage = () => (
-  <div className="bg-[#0B1120] rounded-xl p-6">
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-lg font-semibold">Profile Management Dashboard</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Profile Management Dashboard</h3>
     </div>
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={profile || ''}
         alt="Profile Management System"
-        className="w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
+      />
+    </div>
+  </div>
+);
+
+const LearnspirePrepAnalyticsImage = () => (
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
+    <div className="flex justify-between items-center mb-6">
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Learnspire Prep Analytics</h3>
+    </div>
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
+      <img
+        src={prepresult || ''}
+        alt="Learnspire Prep Analytics"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
+      />
+    </div>
+  </div>
+);
+
+const PerformanceManagementSystemImage = () => (
+  <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
+    <div className="flex justify-between items-center mb-6">
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Performance Management System</h3>
+    </div>
+    <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
+      <img
+        src={performance || ''}
+        alt="Performance Management System"
+        className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
   </div>
@@ -140,7 +172,7 @@ const InsightsSection = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh'].forEach((section) => {
+    ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth'].forEach((section) => {
       gsap.fromTo(
         `.insights-dashboard-${section}`,
         { y: 100, opacity: 0 },
@@ -265,9 +297,62 @@ const InsightsSection = () => {
     }
   ];
 
+  const prepAnalyticsInsights = [
+    {
+      title: "Structured Preparation Ecosystem",
+      description: "Master coding, aptitude, communication, and placement-focused skills through a structured preparation ecosystem."
+    },
+    {
+      title: "Industry-aligned Assessments",
+      description: "Practice with industry-aligned assessments, track your progress, and identify areas for improvement."
+    },
+    {
+      title: "Personalized Learning",
+      description: "Build confidence, enhance employability, and become placement-ready with personalized learning and performance insights."
+    }
+  ];
+
+  const performanceManagementInsights = [
+    {
+      title: "Centralized Student Profile",
+      description: "Monitor every student's academic, assessment, coding, and communication performance through a centralized profile."
+    },
+    {
+      title: "Actionable Insights",
+      description: "Gain actionable insights with detailed analytics, rankings, progress tracking, and performance reports."
+    },
+    {
+      title: "Data-Driven Development",
+      description: "Identify skill gaps, measure growth, and support data-driven student development and placement readiness."
+    }
+  ];
+
   return (
-    <section className="font-Kanit w-full bg-black py-20 overflow-hidden" id="insights">
-      <div className="container mx-auto px-4 space-y-32">
+    <section className="font-Kanit w-full bg-black py-24 overflow-hidden relative" id="insights">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-purple-900/15 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        {/* Section header */}
+        <div className="text-center mb-24">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold tracking-widest uppercase mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+            Platform Insights
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-5 tracking-tight">
+            Everything you need,{' '}
+            <span style={{ background: 'linear-gradient(135deg,#a78bfa,#f472b6,#fb923c)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              in one place
+            </span>
+          </h2>
+          <p className="text-zinc-500 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+            From dashboards and analytics to coding prep and communication assessments — explore how Learnspire empowers every part of the learning journey.
+          </p>
+        </div>
+
+        <div className="space-y-32">
         {/* First Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative order-2 lg:order-1">
@@ -484,6 +569,69 @@ const InsightsSection = () => {
           </div>
         </div>
 
+        {/* Eighth Section - Learnspire Prep Analytics */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="order-1 space-y-12 insights-content-eighth">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Learnspire Prep Analytics
+              </h2>
+              <p className="text-gray-400 max-w-xl">
+                Master coding, aptitude, communication, and placement-focused skills through a structured preparation ecosystem.
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {prepAnalyticsInsights.map((insight, index) => (
+                <div key={index}>
+                  <InsightCard {...insight} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative order-2">
+            <div className="insights-dashboard-eighth relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20">
+              <LearnspirePrepAnalyticsImage />
+              <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/30 rounded-full blur-[120px]" />
+              <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-pink-500/30 rounded-full blur-[120px]" />
+            </div>
+            <div className="absolute -top-10 -left-10 w-full h-full bg-gradient-to-br from-purple-500/10 to-transparent rounded-xl -z-10" />
+          </div>
+        </div>
+
+        {/* Ninth Section - Performance Management System */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="insights-dashboard-ninth relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20">
+              <PerformanceManagementSystemImage />
+              <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-purple-500/30 rounded-full blur-[120px]" />
+              <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-pink-500/30 rounded-full blur-[120px]" />
+            </div>
+            <div className="absolute -top-10 -left-10 w-full h-full bg-gradient-to-br from-purple-500/10 to-transparent rounded-xl -z-10" />
+          </div>
+
+          <div className="order-1 lg:order-2 space-y-12 insights-content-ninth">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Performance Management System
+              </h2>
+              <p className="text-gray-400 max-w-xl">
+                Gain actionable insights with detailed analytics, rankings, progress tracking, and performance reports.
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {performanceManagementInsights.map((insight, index) => (
+                <div key={index}>
+                  <InsightCard {...insight} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        </div>
       </div>
     </section>
   );
