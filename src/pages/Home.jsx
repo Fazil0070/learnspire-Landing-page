@@ -1,7 +1,9 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { Lock } from 'lucide-react';
 
+import dashboardImg from '../assets/dashboard.png';
 import InsightsSection from './Insight';
 import Footer from '../components/Footer';
 import Benefits from './Benefits';
@@ -9,148 +11,120 @@ import Benefits from './Benefits';
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Animated Star Field Component
-const StarField = () => {
-  const [stars, setStars] = useState([]);
+const HeroBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 hero-glow" />
 
-  useEffect(() => {
-    // Generate random stars
-    const generateStars = () => {
-      const starArray = [];
-      for (let i = 0; i < 150; i++) {
-        starArray.push({
-          id: i,
-          x: Math.random() * 100,
-          y: Math.random() * 100,
-          size: Math.random() * 2 + 0.5,
-          duration: Math.random() * 3 + 2,
-          delay: Math.random() * 2,
-          opacity: Math.random() * 0.5 + 0.3,
-        });
-      }
-      setStars(starArray);
-    };
+    <div className="hero-aurora hero-aurora-1" />
+    <div className="hero-aurora hero-aurora-2" />
+    <div className="hero-aurora hero-aurora-3" />
 
-    generateStars();
-  }, []);
+    <div className="absolute inset-0 hero-dot-grid opacity-40" />
 
-  useEffect(() => {
-    // Animate stars flowing downward
-    stars.forEach((star) => {
-      gsap.to(`#star-${star.id}`, {
-        y: '+=100vh',
-        duration: star.duration * 10,
-        repeat: -1,
-        ease: 'none',
-        delay: star.delay,
-      });
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(100%,900px)] h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+    <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent" />
+  </div>
+);
 
-      // Twinkle effect
-      gsap.to(`#star-${star.id}`, {
-        opacity: star.opacity * 0.3,
-        duration: star.duration,
-        yoyo: true,
-        repeat: -1,
-        ease: 'power1.inOut',
-      });
-    });
-  }, [stars]);
+const AI_CAPABILITIES = [
+  { label: 'AI Proctoring', icon: '◈' },
+  { label: 'Smart Analytics', icon: '◎' },
+  { label: 'Adaptive Paths', icon: '◇' },
+  { label: 'White-Label', icon: '✦' },
+];
 
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {stars.map((star) => (
-        <div
-          key={star.id}
-          id={`star-${star.id}`}
-          className="absolute rounded-full bg-white"
-          style={{
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            opacity: star.opacity,
-            boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, 0.8)`,
-          }}
-        />
-      ))}
+const HeroPreview = () => (
+  <div className="hero-browser-wrap relative w-full max-w-[min(100%,38rem)] lg:max-w-none mx-auto lg:mx-0">
+    <div className="hero-orbit hidden lg:block" aria-hidden="true">
+      <span className="hero-orbit-ring" />
+      <span className="hero-orbit-ring hero-orbit-ring-2" />
     </div>
-  );
-};
 
-// Floating Particles Component
-const FloatingParticles = () => {
-  const [particles, setParticles] = useState([]);
-
-  useEffect(() => {
-    const particleArray = [];
-    for (let i = 0; i < 20; i++) {
-      particleArray.push({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 100 + 50,
-        duration: Math.random() * 20 + 10,
-        delay: Math.random() * 5,
-      });
-    }
-    setParticles(particleArray);
-  }, []);
-
-  useEffect(() => {
-    particles.forEach((particle) => {
-      gsap.to(`#particle-${particle.id}`, {
-        x: `+=${Math.random() * 200 - 100}`,
-        y: `+=${Math.random() * 200 - 100}`,
-        duration: particle.duration,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        delay: particle.delay,
-      });
-    });
-  }, [particles]);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          id={`particle-${particle.id}`}
-          className="absolute rounded-full"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            background: `radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)`,
-            filter: 'blur(40px)',
-          }}
-        />
-      ))}
+    <div className="hero-float-card hero-float-card-top hidden sm:flex">
+      <div className="hero-float-icon text-purple-400">◈</div>
+      <div>
+        <p className="text-[10px] text-zinc-500 uppercase tracking-wider">AI Insight</p>
+        <p className="text-xs font-semibold text-white">+12% learner engagement</p>
+      </div>
     </div>
-  );
-};
+
+    <div className="hero-float-card hero-float-card-bottom hidden sm:flex">
+      <div className="hero-float-icon text-pink-400">✓</div>
+      <div>
+        <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Auto-graded</p>
+        <p className="text-xs font-semibold text-white">1,240 assessments today</p>
+      </div>
+    </div>
+
+    <div className="hero-browser-frame">
+      <div className="hero-browser-glow" aria-hidden="true" />
+
+      <div className="hero-browser relative rounded-xl sm:rounded-2xl overflow-hidden bg-zinc-950">
+        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/10 bg-zinc-900/95">
+          <div className="flex gap-1.5 flex-shrink-0">
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f57]" />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#febc2e]" />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#28c840]" />
+          </div>
+          <div className="flex-1 min-w-0 flex justify-center">
+            <div className="flex items-center gap-1.5 sm:gap-2 w-full max-w-[240px] sm:max-w-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-black/50 border border-white/10">
+              <Lock className="w-3 h-3 text-emerald-500/80 flex-shrink-0" />
+              <span className="text-[10px] sm:text-xs text-zinc-300 truncate font-medium">learnspire.ai</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="text-[9px] sm:text-[10px] font-medium text-emerald-400/90 hidden xs:inline">AI Live</span>
+          </div>
+        </div>
+
+        <div className="relative bg-white overflow-hidden hero-dashboard-screen">
+          <img
+            src={dashboardImg}
+            alt="Learnspire AI institution dashboard"
+            className="w-full h-auto block object-cover object-top"
+            loading="eager"
+            draggable={false}
+          />
+          <div className="hero-scan-line" aria-hidden="true" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-zinc-950/40 to-transparent pointer-events-none" />
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 // Scroll Progress Indicator
 const ScrollProgress = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const barRef = useRef(null);
 
   useEffect(() => {
-    const updateScrollProgress = () => {
+    let ticking = false;
+    const update = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (window.scrollY / scrollHeight) * 100;
-      setScrollProgress(scrolled);
+      const scrolled = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${scrolled / 100})`;
+      }
+      ticking = false;
     };
-
-    window.addEventListener('scroll', updateScrollProgress);
-    return () => window.removeEventListener('scroll', updateScrollProgress);
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full h-1 bg-gray-900 z-[9998]">
       <div
-        className="h-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-all duration-300"
-        style={{ width: `${scrollProgress}%` }}
+        ref={barRef}
+        className="h-full w-full origin-left bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 will-change-transform"
+        style={{ transform: 'scaleX(0)' }}
       />
     </div>
   );
@@ -190,7 +164,7 @@ const TechStackMarquee = () => {
           {duplicatedItems.map((tech, index) => (
             <div
               key={`${tech}-${index}`}
-              className="inline-flex items-center px-4 py-2 md:px-5 md:py-2.5 rounded-full bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/15 transition-all duration-300 transform-gpu group cursor-default"
+              className="inline-flex items-center px-4 py-2 md:px-5 md:py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 group cursor-default"
             >
               <span className="text-xs md:text-sm font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">
                 {tech}
@@ -203,27 +177,19 @@ const TechStackMarquee = () => {
   };
 
   return (
-    <section className="w-full bg-black py-20 overflow-hidden relative">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black pointer-events-none" />
-      {/* Fade edges on marquee */}
-      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+    <section className="w-full bg-black py-20 sm:py-24 overflow-hidden relative border-t border-white/[0.04]">
+      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-semibold tracking-widest uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-            Tech Stack
-          </div>
-          <h2 className="font-extrabold tracking-tight text-3xl sm:text-4xl md:text-5xl mb-4 text-white">
-            Powered by{' '}
-            <span style={{ background: 'linear-gradient(135deg,#a78bfa,#38bdf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              Modern Technologies
-            </span>
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-12 sm:mb-14">
+          <span className="section-label mb-4">Tech stack</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4 mt-4">
+            Built on{' '}
+            <span className="text-gradient-brand">modern infrastructure</span>
           </h2>
-          <p className="text-zinc-500 max-w-xl mx-auto text-sm sm:text-base">
-            Built with cutting-edge tools and frameworks for optimal performance
+          <p className="text-zinc-500 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
+            Reliable, scalable tools powering every part of the platform
           </p>
         </div>
 
@@ -239,53 +205,6 @@ const TechStackMarquee = () => {
           </div>
         </div>
       </div>
-
-      {/* Add CSS animations */}
-      <style jsx>{`
-        @keyframes marquee-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-25%);
-          }
-        }
-
-        @keyframes marquee-right {
-          0% {
-            transform: translateX(-25%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes flow-animation {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        
-        @keyframes energy-beam {
-          0% {
-            background-position: -200% 0;
-          }
-          100% {
-            background-position: 200% 0;
-          }
-        }
-        @keyframes energy-beam-vertical {
-          0% {
-            background-position: 0 -200%;
-          }
-          100% {
-            background-position: 0 200%;
-          }
-        }
-      `}</style>
     </section>
   );
 };
@@ -297,13 +216,13 @@ const ProcessFlowchart = () => {
       id: 1,
       title: "Onboard",
       icon: "rocket",
-      description: "PMS: Profile Creation & Setup"
+      description: "PMS: Profile & Performance Setup"
     },
     {
       id: 2,
       title: "Learn",
       icon: "book",
-      description: "LMS: AI-Driven Coursework"
+      description: "LMS: AI-Driven Learning Paths"
     },
     {
       id: 3,
@@ -321,29 +240,20 @@ const ProcessFlowchart = () => {
       id: 5,
       title: "Analyze",
       icon: "chart",
-      description: "Performance Insights & Growth"
+      description: "PMS: Performance Insights & Growth"
     }
   ];
 
   return (
-    <section className="process-flowchart py-10 px-4 relative overflow-hidden">
-      {/* Background Grid */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `linear-gradient(to right, #4f46e5 1px, transparent 1px), linear-gradient(to bottom, #4f46e5 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-          maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%)'
-        }}
-      />
-
-      <div className="container mx-auto relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6 py-2 leading-relaxed drop-shadow-sm">
-            The Learnspire Ecology
+    <section className="process-flowchart py-16 sm:py-24 px-5 sm:px-6 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="section-label mb-4">How it works</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4 mt-4">
+            The <span className="text-gradient-brand">Learnspire AI</span> journey
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            A seamless journey from onboarding to mastery, powered by integrated intelligent systems.
+          <p className="text-zinc-500 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+            From onboarding to mastery — five integrated steps in one ecosystem.
           </p>
         </div>
 
@@ -434,8 +344,8 @@ const ProcessFlowchart = () => {
 const HighlightsSection = () => {
   const highlights = [
     {
-      title: "Custom Branding",
-      description: "Fully customizable interface to seamlessly match your unique brand identity.",
+      title: "White-Labeling",
+      description: "Launch under your own brand — custom logos, colors, and domain for a fully white-labeled experience.",
       icon: (
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
@@ -475,79 +385,38 @@ const HighlightsSection = () => {
     }
   ];
 
-  const handleMouseMove = (e) => {
-    const cards = document.getElementsByClassName("highlight-card");
-    for (const card of cards) {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
-    }
-  };
-
   return (
-    <section
-      className="highlights-section py-24 px-4 relative overflow-hidden bg-black"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Grid Background */}
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-          maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
-        }}
-      />
-
-      {/* Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold tracking-widest uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            Why Learnspire
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Why Choose{' '}
-            <span style={{ background: 'linear-gradient(135deg,#a78bfa,#f472b6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              Learnspire?
-            </span>
+    <section className="highlights-section py-20 sm:py-28 px-5 sm:px-6 relative overflow-hidden bg-black border-t border-white/[0.04]">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="section-label mb-4">Why Learnspire AI</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4 mt-4">
+            Built for institutions that{' '}
+            <span className="text-gradient-brand">demand more</span>
           </h2>
-          <p className="text-zinc-500 max-w-xl mx-auto text-base sm:text-lg">
-            Experience the next evolution of educational technology
+          <p className="text-zinc-500 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
+            Enterprise reliability with the flexibility of open-source technology
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 max-w-7xl mx-auto">
           {highlights.map((item, index) => (
             <div
               key={index}
-              className="highlight-card group relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md px-8 py-10 overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 shadow-xl hover:shadow-2xl hover:shadow-purple-500/10"
+              className="highlight-card group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] px-6 py-8 overflow-hidden transition-colors duration-300 hover:bg-white/[0.04] hover:border-white/[0.12]"
             >
-              {/* Spotlight Effect Layer */}
-              <div
-                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
-                style={{
-                  background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)`,
-                }}
-              />
-
               <div className="relative z-10">
-                <div className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${item.gradient} bg-opacity-10 mb-6 group-hover:scale-110 transition-transform duration-300 ring-1 ring-white/10`}>
+                <div className={`inline-flex p-2.5 rounded-lg bg-gradient-to-br ${item.gradient} mb-5 ring-1 ring-white/[0.08]`}>
                   <div className="text-white">
                     {item.icon}
                   </div>
                 </div>
 
-                <h3 className="text-xl font-semibold text-white mb-3 tracking-tight group-hover:text-purple-200 transition-colors">
+                <h3 className="text-base font-semibold text-white mb-2 tracking-tight">
                   {item.title}
                 </h3>
 
-                <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300">
+                <p className="text-zinc-500 text-sm leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -564,7 +433,7 @@ const StatsCounter = () => {
   const [isVisible, setIsVisible] = useState(false);
   const stats = [
     { number: 10000, suffix: '+', label: 'Active Students', icon: '👥' },
-    { number: 500, suffix: '+', label: 'Courses Available', icon: '📚' },
+    { number: 3, suffix: '', label: 'Integrated Platforms', icon: '🏛️' },
     { number: 95, suffix: '%', label: 'Success Rate', icon: '🎯' },
     { number: 50, suffix: '+', label: 'Expert Instructors', icon: '👨‍🏫' }
   ];
@@ -643,12 +512,24 @@ const FloatingActionButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 800);
+    let ticking = false;
+    let visible = false;
+    const update = () => {
+      const shouldShow = window.scrollY > 800;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        setIsVisible(shouldShow);
+      }
+      ticking = false;
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const scrollToTop = () => {
@@ -658,11 +539,17 @@ const FloatingActionButton = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 z-[9997] w-14 h-14 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 shadow-lg shadow-purple-500/50 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-purple-500/70 group ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20 pointer-events-none'
-        }`}
+      className={`fixed bottom-6 right-6 z-[9997] w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 group ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'
+      }`}
+      style={{
+        background: 'linear-gradient(135deg, #7c3aed, #a855f7, #ec4899)',
+        boxShadow: '0 0 25px rgba(168, 85, 247, 0.4)',
+      }}
+      aria-label="Scroll to top"
     >
       <svg
-        className="w-6 h-6 text-white group-hover:animate-bounce"
+        className="w-4 h-4 text-white"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -673,34 +560,22 @@ const FloatingActionButton = () => {
   );
 };
 
-const FeatureIcon = ({ children, gradient }) => (
+const FeatureIcon = ({ children }) => (
   <div
-    className="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 flex-shrink-0"
-    style={{ background: gradient || 'linear-gradient(135deg,#7c3aed,#a855f7)' }}
+    className="w-10 h-10 rounded-xl flex items-center justify-center text-white mb-4 flex-shrink-0"
+    style={{ background: 'linear-gradient(135deg,#7c3aed,#a855f7)' }}
   >
     {children}
   </div>
 );
 
-const FeatureCard = ({ icon, title, description, gradient }) => (
-  <div className="group relative p-px rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2"
-    style={{ background: 'rgba(255,255,255,0.06)' }}
-  >
-    <div
-      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"
-      style={{ background: gradient }}
-    />
-    <div className="relative bg-[#0a0a0a] rounded-3xl p-7 h-full">
-      <div
-        className="absolute top-0 right-0 w-40 h-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[70px] pointer-events-none rounded-full"
-        style={{ background: gradient }}
-      />
-      <FeatureIcon gradient={gradient}>{icon}</FeatureIcon>
-      <h3 className="text-lg font-bold mb-3 text-white group-hover:text-purple-200 transition-colors tracking-tight">
-        {title}
-      </h3>
-      <p className="text-zinc-500 group-hover:text-zinc-400 transition-colors leading-relaxed text-sm">{description}</p>
-    </div>
+const FeatureCard = ({ icon, title, description }) => (
+  <div className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 h-full transition-all duration-300 hover:bg-white/[0.04] hover:border-white/[0.12]">
+    <FeatureIcon>{icon}</FeatureIcon>
+    <h3 className="text-base font-semibold mb-2 text-white tracking-tight">
+      {title}
+    </h3>
+    <p className="text-zinc-500 leading-relaxed text-sm">{description}</p>
   </div>
 );
 
@@ -712,7 +587,7 @@ const FeaturesSection = () => {
           <path d="M20 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V6C22 4.89543 21.1046 4 20 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "Interactive Courses",
+      title: "Interactive Learning",
       description: "Engage learners with dynamic, adaptive content that evolves with their progress.",
       gradient: 'linear-gradient(135deg,#7c3aed55,#a855f755)'
     },
@@ -763,35 +638,26 @@ const FeaturesSection = () => {
     {
       icon: (
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 21C4 18.2386 7.58172 16 12 16C16.4183 16 20 18.2386 20 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M12 13C14.7614 13 17 10.7614 17 8C17 5.23858 14.7614 3 12 3C9.23858 3 7 5.23858 7 8C7 10.7614 9.23858 13 12 13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "User-Friendly UI",
-      description: "Navigate effortlessly with our intuitive, customizable interface design.",
+      title: "White-Labeling",
+      description: "Deploy Learnspire under your institution's brand with custom logos, themes, and your own domain.",
       gradient: 'linear-gradient(135deg,#05966955,#0891b255)'
     },
   ];
 
   return (
-    <section className="font-kamerik w-full bg-black py-24 relative overflow-hidden" id="features">
-      {/* background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-purple-900/15 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-16 reveal-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold tracking-widest uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            Platform Features
-          </div>
-          <h2 className="font-extrabold tracking-tight text-3xl sm:text-4xl md:text-5xl mb-5 text-white">
-            Features loved by{' '}
-            <span style={{ background: 'linear-gradient(135deg,#a78bfa,#f472b6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>everyone</span>
+    <section className="w-full bg-black py-20 sm:py-28 relative overflow-hidden border-t border-white/[0.04]" id="features">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-12 sm:mb-16 reveal-up">
+          <span className="section-label mb-4">Platform features</span>
+          <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl mb-4 text-white mt-4">
+            Everything your campus{' '}
+            <span className="text-gradient-brand">needs</span>
           </h2>
-          <p className="font-light text-base sm:text-lg text-zinc-500 max-w-2xl mx-auto">
-            Discover the tools and features that make our platform the perfect choice for modern education
+          <p className="text-sm sm:text-base text-zinc-500 max-w-lg mx-auto leading-relaxed">
+            From learning paths to assessments — one integrated platform for modern education
           </p>
         </div>
 
@@ -808,61 +674,30 @@ const FeaturesSection = () => {
 };
 
 
-// Premium CTA Banner
+// CTA Banner
 const DemoContactSection = () => (
-  <div className="w-full bg-black px-4 sm:px-6 py-24 relative overflow-hidden">
-    {/* Glow orbs */}
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-purple-800/20 rounded-full blur-[120px] pointer-events-none" />
-    <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-pink-800/15 rounded-full blur-[100px] pointer-events-none" />
+  <div className="w-full bg-black px-5 sm:px-6 py-20 sm:py-28 relative overflow-hidden border-t border-white/[0.04]">
+    <div className="relative z-10 max-w-3xl mx-auto">
+      <div className="card-surface px-6 sm:px-12 py-12 sm:py-16 text-center">
+        <span className="section-label mb-4">Get started</span>
 
-    <div className="relative z-10 max-w-4xl mx-auto">
-      {/* Card with gradient border */}
-      <div className="relative rounded-3xl p-px overflow-hidden"
-        style={{ background: 'linear-gradient(135deg,#7c3aed40,#a855f740,#ec489940,#7c3aed40)' }}
-      >
-        <div className="relative bg-[#0a0a10] rounded-3xl px-8 sm:px-16 py-14 sm:py-20 text-center overflow-hidden">
-          {/* Decorative circles */}
-          <div className="absolute -top-16 -left-16 w-64 h-64 rounded-full border border-purple-500/10" />
-          <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full border border-pink-500/10" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] bg-purple-600/10 blur-[80px] rounded-full pointer-events-none" />
+        <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight mt-4">
+          See <span className="text-gradient-brand">Learnspire AI</span> in action
+        </h2>
+        <p className="text-zinc-500 max-w-md mx-auto mb-8 text-sm sm:text-base leading-relaxed">
+          Schedule a personalized walkthrough and discover how our platform fits your institution.
+        </p>
 
-          {/* Label */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold tracking-widest uppercase mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            Get Started Today
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
-            Ready to transform{' '}
-            <span style={{ background: 'linear-gradient(135deg,#a78bfa,#f472b6,#fb923c)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              education?
-            </span>
-          </h2>
-          <p className="text-zinc-500 max-w-xl mx-auto mb-10 text-base sm:text-lg leading-relaxed">
-            Interested in seeing what our platform can do for you? Get in touch with us for a personalized demo and discover the future of learning.
-          </p>
-
-          <div className="flex flex-col xs:flex-row items-center justify-center gap-4">
-            <a
-              href="/contact"
-              className="group inline-flex items-center gap-2 font-semibold text-white rounded-full hover:-translate-y-1 transition-all duration-300 px-8 py-4"
-              style={{
-                background: 'linear-gradient(135deg,#7c3aed,#a855f7,#ec4899)',
-                boxShadow: '0 0 40px rgba(168,85,247,0.4), inset 0 1px 0 rgba(255,255,255,0.15)'
-              }}
-            >
-              Book a Demo
-              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center gap-2 font-semibold text-zinc-300 hover:text-white rounded-full px-8 py-4 border border-white/10 bg-white/5 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 backdrop-blur-md"
-            >
-              Contact Sales
-            </a>
-          </div>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/contact" className="btn-primary w-full sm:w-auto px-7 py-3.5 text-sm">
+            Book a demo
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a href="/contact" className="btn-secondary w-full sm:w-auto px-7 py-3.5 text-sm">
+            Contact sales
+          </a>
         </div>
       </div>
     </div>
@@ -873,48 +708,53 @@ const Home = () => {
 
 
   const setupAnimations = useCallback(() => {
-    // Initial page load animation
+    ScrollTrigger.config({ limitCallbacks: true });
+
     gsap.fromTo(
       '.hero-content',
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
     );
 
+    gsap.fromTo(
+      '.hero-visual',
+      { opacity: 0, y: 24, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.8, delay: 0.15, ease: 'power2.out' }
+    );
 
+    gsap.fromTo(
+      '.hero-float-card',
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.6, delay: 0.5, stagger: 0.12, ease: 'power2.out' }
+    );
 
-    // Feature cards stagger animation with smooth reveal
-    gsap.utils.toArray('.feature-card').forEach((card, index) => {
+    gsap.utils.toArray('.feature-card').forEach((card) => {
       gsap.fromTo(
         card,
-        {
-          opacity: 0,
-          y: 50
-        },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          delay: index * 0.1,
-          ease: 'power3.out',
+          duration: 0.6,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
-            start: 'top bottom-=100',
-            end: 'bottom center',
-            toggleActions: 'play none none reverse'
-          }
+            start: 'top 90%',
+            once: true,
+            toggleActions: 'play none none none',
+          },
         }
       );
     });
 
-    // Smooth scroll handling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth'
-          });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
@@ -938,152 +778,77 @@ const Home = () => {
       <FloatingActionButton />
 
       {/* Main Content */}
-      <main className="font-kamerik  font mt-16" >
+      <main>
+        <section className="hero-section relative overflow-hidden bg-black min-h-[calc(100vh-5rem)] lg:min-h-screen flex flex-col">
+          <HeroBackground />
 
-        <section className="hero-section min-h-screen w-full max-w-[100vw] relative flex flex-col overflow-hidden bg-black">
-          {/* Animated Star + Particle Background */}
-          <StarField />
-          <FloatingParticles />
+          <div className="relative z-10 flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24 w-full">
+            <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 sm:gap-12 lg:gap-10 xl:gap-14 items-center h-full">
+              <div className="hero-content flex flex-col gap-5 sm:gap-6 text-center lg:text-left order-1">
+                <div className="inline-flex items-center gap-2 self-center lg:self-start px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-md text-[10px] font-bold text-white hero-ai-badge">AI</span>
+                  <span className="text-[11px] sm:text-xs font-medium text-zinc-300">Next-gen institutional intelligence</span>
+                </div>
 
-          {/* Mesh Grid Overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.04]"
-            style={{
-              backgroundImage: `linear-gradient(rgba(168,85,247,1) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,1) 1px, transparent 1px)`,
-              backgroundSize: '60px 60px',
-            }}
-          />
-
-          {/* Gradient Orbs */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none" />
-          <div className="absolute top-[-10%] left-[10%] w-[45vw] h-[45vw] max-w-[700px] max-h-[700px] bg-purple-700/25 rounded-full blur-[130px] animate-pulse" style={{ animationDuration: '5s' }} />
-          <div className="absolute bottom-[-5%] right-[5%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-pink-700/20 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '7s', animationDelay: '1.5s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-indigo-700/15 rounded-full blur-[160px] animate-pulse pointer-events-none" style={{ animationDuration: '9s', animationDelay: '3s' }} />
-
-          {/* Hero Main Content */}
-          <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-            <div className="hero-content w-full max-w-5xl mx-auto flex flex-col items-center text-center gap-6 sm:gap-8">
-
-              {/* Animated Badge */}
-              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/[0.07] border border-white/[0.15] backdrop-blur-2xl hover:bg-white/[0.12] transition-all duration-300 cursor-pointer group shadow-[0_0_25px_rgba(168,85,247,0.15)] hover:shadow-[0_0_40px_rgba(168,85,247,0.35)]">
-                <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-full w-full bg-purple-500"></span>
-                </span>
-                <span
-                  className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.12em] sm:tracking-[0.15em] uppercase"
-                  style={{ background: 'linear-gradient(90deg,#c084fc,#f472b6,#818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                <h1
+                  className="font-display font-bold tracking-tight leading-[1.05] px-1 sm:px-0"
+                  style={{ fontSize: 'clamp(2rem, 5.5vw + 0.25rem, 3.75rem)' }}
                 >
-                  Next Generation Learning Platform
-                </span>
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                </svg>
+                  <span className="text-white">Where campuses</span>
+                  <br />
+                  <span className="text-shimmer">meet AI.</span>
+                </h1>
+
+                <p className="text-zinc-400 leading-relaxed max-w-lg mx-auto lg:mx-0 text-[15px] sm:text-base lg:text-lg px-2 sm:px-0">
+                  One intelligent platform for LMS, AMS &amp; PMS — with white-labeling, AI proctoring, coding labs, and LSRW built in.
+                </p>
+
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 max-w-lg mx-auto lg:mx-0">
+                  {AI_CAPABILITIES.map((cap) => (
+                    <span
+                      key={cap.label}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-zinc-400 border border-white/[0.07] bg-white/[0.03] hover:border-purple-500/30 hover:text-zinc-200 transition-colors"
+                    >
+                      <span className="text-purple-400 text-[10px]">{cap.icon}</span>
+                      {cap.label}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-3 lg:justify-start justify-center pt-1 w-full max-w-md mx-auto lg:mx-0 lg:max-w-none">
+                  <a href="/contact" className="btn-primary w-full xs:w-auto px-7 py-3.5 text-sm justify-center">
+                    Start with AI
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                  <a href="#features" className="btn-secondary w-full xs:w-auto px-7 py-3.5 text-sm justify-center">
+                    See platform
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-5 sm:pt-6 border-t border-white/[0.06] mt-1 max-w-md mx-auto lg:mx-0 lg:max-w-none w-full">
+                  {[
+                    { value: 'LMS', label: 'Learning', desc: 'AI-driven paths' },
+                    { value: 'AMS', label: 'Assessment', desc: 'Smart grading' },
+                    { value: 'PMS', label: 'Performance', desc: 'Profile & growth' },
+                  ].map((mod) => (
+                    <div key={mod.value} className="hero-module-card group rounded-xl border border-white/[0.08] bg-white/[0.02] px-2 sm:px-3 py-3 sm:py-4 text-center lg:text-left transition-colors hover:border-purple-500/25 hover:bg-white/[0.04]">
+                      <p className="text-sm sm:text-lg font-bold text-gradient-brand tracking-tight">{mod.value}</p>
+                      <p className="text-[10px] sm:text-xs text-zinc-400 mt-0.5 font-medium">{mod.label}</p>
+                      <p className="text-[9px] sm:text-[10px] text-zinc-600 mt-1 hidden sm:block group-hover:text-zinc-500 transition-colors">{mod.desc}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Hero Headline */}
-              <h1 className="font-extrabold tracking-tight leading-[1.1] text-white w-full"
-                style={{ fontSize: 'clamp(2rem, 5.5vw + 0.5rem, 4.5rem)' }}
-              >
-                <span className="block text-white/90 mb-1 sm:mb-2">
-                  The Complete AI-Powered
-                </span>
-                <span
-                  className="block pb-2"
-                  style={{
-                    background: 'linear-gradient(135deg, #a78bfa 0%, #c084fc 30%, #f472b6 65%, #fb923c 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    filter: 'drop-shadow(0 0 40px rgba(168,85,247,0.4))'
-                  }}
-                >
-                  LMS, AMS &amp; PMS Ecosystem
-                </span>
-              </h1>
-
-              {/* Subheadline */}
-              <p
-                className="text-zinc-400 leading-relaxed max-w-2xl font-light px-2"
-                style={{ fontSize: 'clamp(0.9rem, 1.8vw + 0.3rem, 1.2rem)' }}
-              >
-                Unify learning, assessment, and profile management with our advanced ecosystem.
-                From AI-driven coding challenges and LSRW communication suites to comprehensive
-                student profiling and analytics—empower your institution with a secure,
-                open-source solution tailored for success.
-              </p>
-
-              {/* Platform Pillars */}
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-2">
-                {[
-                  { label: 'LMS', desc: 'Learning', color: 'from-violet-500/20 to-violet-500/5', border: 'border-violet-500/30', text: 'text-violet-300' },
-                  { label: 'AMS', desc: 'Assessment', color: 'from-fuchsia-500/20 to-fuchsia-500/5', border: 'border-fuchsia-500/30', text: 'text-fuchsia-300' },
-                  { label: 'PMS', desc: 'Profiling', color: 'from-pink-500/20 to-pink-500/5', border: 'border-pink-500/30', text: 'text-pink-300' },
-                  { label: 'Coding', desc: 'Challenges', color: 'from-orange-500/20 to-orange-500/5', border: 'border-orange-500/30', text: 'text-orange-300' },
-                  { label: 'LSRW', desc: 'Communication', color: 'from-sky-500/20 to-sky-500/5', border: 'border-sky-500/30', text: 'text-sky-300' },
-                ].map((pill) => (
-                  <div key={pill.label}
-                    className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r ${pill.color} border ${pill.border} backdrop-blur-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 cursor-default`}
-                  >
-                    <span className={`text-xs sm:text-sm font-bold ${pill.text}`}>{pill.label}</span>
-                    <span className="text-[10px] sm:text-xs text-zinc-500 hidden xs:inline">{pill.desc}</span>
-                  </div>
-                ))}
+              <div className="hero-visual w-full order-2 pb-4 sm:pb-8 lg:pb-0">
+                <HeroPreview />
               </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 mt-4 w-full">
-                <a
-                  href="/contact"
-                  className="group relative inline-flex items-center justify-center gap-2 font-semibold text-white transition-all duration-500 rounded-full hover:-translate-y-1 w-full xs:w-auto"
-                  style={{
-                    padding: 'clamp(0.75rem, 1.5vw, 1rem) clamp(1.75rem, 3vw, 2.5rem)',
-                    fontSize: 'clamp(0.875rem, 1.2vw, 1.05rem)',
-                    background: 'linear-gradient(135deg, #7c3aed, #a855f7, #ec4899)',
-                    boxShadow: '0 0 35px rgba(168,85,247,0.45), inset 0 1px 0 rgba(255,255,255,0.15)'
-                  }}
-                >
-                  <span>Get Started Free</span>
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
-
-                <a
-                  href="#features"
-                  className="group inline-flex items-center justify-center gap-2 font-semibold text-zinc-200 transition-all duration-300 rounded-full border border-white/[0.12] bg-white/[0.05] backdrop-blur-xl hover:bg-white/[0.1] hover:border-white/25 hover:-translate-y-1 hover:text-white w-full xs:w-auto"
-                  style={{
-                    padding: 'clamp(0.75rem, 1.5vw, 1rem) clamp(1.75rem, 3vw, 2.5rem)',
-                    fontSize: 'clamp(0.875rem, 1.2vw, 1.05rem)',
-                  }}
-                >
-                  <span>Explore Features</span>
-                  <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </a>
-              </div>
-
-              {/* Trust Line */}
-              <div className="flex items-center gap-3 mt-2 opacity-60">
-                <div className="h-px w-8 sm:w-12 bg-gradient-to-r from-transparent to-white/30" />
-                <span className="text-[10px] sm:text-xs text-zinc-500 tracking-widest uppercase">Trusted by Institutions Nationwide</span>
-                <div className="h-px w-8 sm:w-12 bg-gradient-to-l from-transparent to-white/30" />
-              </div>
-
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 animate-bounce">
-              <span className="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">Scroll</span>
-              <svg className="w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
             </div>
           </div>
 
-          {/* Process Flowchart flows naturally below */}
-          <div className="relative z-10 w-full">
+          <div className="relative z-10 w-full border-t border-white/[0.04] mt-auto">
             <ProcessFlowchart />
           </div>
         </section>

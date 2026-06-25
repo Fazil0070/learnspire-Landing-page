@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from "@emailjs/browser";
 import { Linkedin } from 'lucide-react';
+import BrandName from './BrandName';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -46,16 +47,16 @@ const Footer = () => {
   };
 
   return (
-    <footer className="font-Kanit bg-black text-white relative overflow-hidden border-t border-white/10">
+    <footer className="bg-black text-white relative overflow-hidden border-t border-white/[0.06]">
       {/* Ambient background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Newsletter Section */}
       <div className="max-w-7xl mx-auto px-4 pt-20 pb-12 relative z-10">
-        <div className="bg-zinc-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-8 md:p-12 mb-20 shadow-[0_0_40px_rgba(168,85,247,0.1)]">
+        <div className="card-surface p-8 md:p-12 mb-16 sm:mb-20">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Join our newsletter</h2>
-            <p className="text-gray-400 mb-8 text-lg">Stay updated with the latest in AI-powered education.</p>
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-3 text-white tracking-tight">Join our newsletter</h2>
+            <p className="text-zinc-500 mb-8 text-sm sm:text-base">Updates on new features and platform improvements.</p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
               <input
                 type="email"
@@ -68,7 +69,7 @@ const Footer = () => {
               <button
                 type="submit"
                 disabled={status.loading}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 disabled:opacity-50 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5"
+                className="btn-primary font-semibold px-8 py-4 rounded-xl disabled:opacity-50"
               >
                 {status.loading ? 'Signing up...' : 'Subscribe'}
               </button>
@@ -85,11 +86,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Brand Info */}
           <div className="col-span-1 md:col-span-1">
-            <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-6 inline-block">
-              LearnSpire
-            </span>
-            <p className="text-gray-400 leading-relaxed">
-              Empowering institutions with a complete AI-driven educational ecosystem.
+            <BrandName size="lg" showTagline className="mb-6" />
+            <p className="text-zinc-500 text-sm leading-relaxed">
+              Empowering institutions with an AI-driven educational ecosystem.
             </p>
           </div>
 
@@ -135,7 +134,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-center">
           <p className="text-gray-500 text-sm text-center w-full">
-            © {new Date().getFullYear()} LearnSpire AI. All rights reserved.
+            © {new Date().getFullYear()} Learnspire AI. All rights reserved.
           </p>
         </div>
       </div>

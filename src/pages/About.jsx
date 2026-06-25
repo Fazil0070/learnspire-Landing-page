@@ -43,10 +43,10 @@ const About = () => {
         {/* Hero Section */}
         <div className="text-center mb-20">
           <h1 className="font-bold text-3xl md:text-5xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-6">
-            ABOUT LEARNSPIRE
+            ABOUT LEARNSPIRE AI
           </h1>
           <p className="text-gray-300 text-lg mb-6 max-w-3xl mx-auto">
-            Learnspire is dedicated to revolutionizing education through innovative learning solutions.
+            Learnspire AI is dedicated to revolutionizing education through innovative learning solutions.
           </p>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto">
             Our platform is designed to empower learners, educators, and institutions with cutting-edge tools to achieve their full potential in the modern world.
@@ -86,8 +86,8 @@ const About = () => {
               <p className="text-gray-400">Students Empowered</p>
             </div>
             <div className="bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-pink-500/20 hover:-translate-y-2 transition-all duration-300">
-              <h3 className="text-4xl font-bold text-pink-500">500+</h3>
-              <p className="text-gray-400">Courses Offered</p>
+              <h3 className="text-4xl font-bold text-pink-500">3</h3>
+              <p className="text-gray-400">Integrated Platforms</p>
             </div>
             <div className="bg-[#0B1120] p-6 rounded-xl border border-gray-800 hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-300">
               <h3 className="text-4xl font-bold text-purple-500">50+</h3>

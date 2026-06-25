@@ -126,12 +126,12 @@ const CommunicationImage = () => (
 const PMSImage = () => (
   <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Profile Management Dashboard</h3>
+      <h3 className="text-white text-xl font-bold tracking-tight drop-shadow-sm">Profile &amp; Performance Dashboard</h3>
     </div>
     <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/5">
       <img
         src={profile || ''}
-        alt="Profile Management System"
+        alt="Profile & Performance Management System"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -171,41 +171,53 @@ const PerformanceManagementSystemImage = () => (
 const InsightsSection = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ limitCallbacks: true });
+
+    const triggers = [];
 
     ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth'].forEach((section) => {
-      gsap.fromTo(
-        `.insights-dashboard-${section}`,
-        { y: 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: `.insights-dashboard-${section}`,
-            start: 'top bottom-=100',
-            end: 'bottom center',
-            toggleActions: 'play none none reverse'
+      triggers.push(
+        gsap.fromTo(
+          `.insights-dashboard-${section}`,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: `.insights-dashboard-${section}`,
+              start: 'top 88%',
+              once: true,
+              toggleActions: 'play none none none',
+            },
           }
-        }
+        ).scrollTrigger
       );
 
-      gsap.fromTo(
-        `.insights-content-${section}`,
-        { x: -50, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: `.insights-content-${section}`,
-            start: 'top bottom-=100',
-            end: 'bottom center',
-            toggleActions: 'play none none reverse'
+      triggers.push(
+        gsap.fromTo(
+          `.insights-content-${section}`,
+          { y: 24, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: `.insights-content-${section}`,
+              start: 'top 88%',
+              once: true,
+              toggleActions: 'play none none none',
+            },
           }
-        }
+        ).scrollTrigger
       );
     });
+
+    return () => {
+      triggers.forEach((t) => t?.kill());
+    };
   }, []);
 
   const studentResultsInsights = [
@@ -552,7 +564,7 @@ const InsightsSection = () => {
           <div className="order-1 lg:order-2 space-y-12 insights-content-seventh">
             <div className="space-y-6">
               <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Profile Management System (PMS)
+                Profile &amp; Performance Management (PMS)
               </h2>
               <p className="text-gray-400 max-w-xl">
                 A robust profile management system ensuring seamless data collection and administrative control.
