@@ -53,7 +53,7 @@ const Products = () => {
     {
       icon: Users,
       title: 'Learnspire Profile+',
-      description: 'Profiles Management System (PMS) offering seamless user profile management with advanced security, comprehensive access controls, and intuitive data organization.',
+      description: 'Profile & Performance Management System (PMS) — manage student profiles, track performance metrics, and deliver actionable growth insights with advanced security and access controls.',
       iconBgColor: 'bg-purple-900/30',
       iconColor: 'text-purple-400',
     },
