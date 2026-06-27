@@ -7,6 +7,7 @@ import BrandName from './BrandName';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const smoothEase = [0.22, 1, 0.36, 1];
 
   useEffect(() => {
     let ticking = false;
@@ -88,17 +89,17 @@ const Header = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[1001]"
+              transition={{ duration: 0.35, ease: smoothEase }}
+              className="fixed inset-0 bg-black/65 backdrop-blur-md z-[1001]"
               onClick={toggleMenu}
             />
 
             <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 350 }}
-              className="fixed top-0 right-0 w-full max-w-sm h-full z-[1002] flex flex-col border-l border-white/10"
+              initial={{ x: '100%', opacity: 0.7 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '100%', opacity: 0.7 }}
+              transition={{ duration: 0.42, ease: smoothEase }}
+              className="fixed top-0 right-0 w-full max-w-sm h-full z-[1002] flex flex-col border-l border-white/10 shadow-2xl shadow-black/50"
               style={{ background: 'linear-gradient(160deg, #0a0a14 0%, #0d0d1a 100%)' }}
             >
               <div className="absolute top-0 right-0 w-48 h-48 bg-purple-700/10 rounded-full blur-[80px] pointer-events-none" />
@@ -119,9 +120,9 @@ const Header = () => {
                 {menuItems.map((item, index) => (
                   <motion.div
                     key={item.path}
-                    initial={{ x: 20, opacity: 0 }}
+                    initial={{ x: 18, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ delay: 0.12 + index * 0.055, duration: 0.36, ease: smoothEase }}
                   >
                     <Link
                       to={item.path}
