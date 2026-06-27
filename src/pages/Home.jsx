@@ -1,7 +1,18 @@
 import { useEffect, useCallback, useState, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import { Lock } from 'lucide-react';
+import {
+  Activity,
+  BarChart3,
+  BrainCircuit,
+  CheckCircle2,
+  Cpu,
+  Layers3,
+  Lock,
+  ShieldCheck,
+  Sparkles,
+  Zap,
+} from 'lucide-react';
 
 import dashboardImg from '../assets/dashboard.png';
 import InsightsSection from './Insight';
@@ -14,12 +25,14 @@ gsap.registerPlugin(ScrollTrigger);
 const HeroBackground = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <div className="absolute inset-0 hero-glow" />
+    <div className="absolute inset-0 hero-premium-mesh" />
 
     <div className="hero-aurora hero-aurora-1" />
     <div className="hero-aurora hero-aurora-2" />
     <div className="hero-aurora hero-aurora-3" />
 
     <div className="absolute inset-0 hero-dot-grid opacity-40" />
+    <div className="absolute inset-0 hero-circuit-grid" />
 
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(100%,900px)] h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
     <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black to-transparent" />
@@ -31,6 +44,19 @@ const AI_CAPABILITIES = [
   { label: 'Smart Analytics', icon: '◎' },
   { label: 'Adaptive Paths', icon: '◇' },
   { label: 'White-Label', icon: '✦' },
+];
+
+const HERO_CAPABILITIES = [
+  { label: 'AI Proctoring', Icon: ShieldCheck },
+  { label: 'Smart Analytics', Icon: BarChart3 },
+  { label: 'Adaptive Paths', Icon: BrainCircuit },
+  { label: 'White-Label', Icon: Sparkles },
+];
+
+const HERO_METRICS = [
+  { value: '98%', label: 'exam integrity' },
+  { value: '4.8x', label: 'faster reviews' },
+  { value: '24/7', label: 'AI monitoring' },
 ];
 
 const HeroPreview = () => (
@@ -90,6 +116,93 @@ const HeroPreview = () => (
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-zinc-950/40 to-transparent pointer-events-none" />
         </div>
       </div>
+    </div>
+  </div>
+);
+
+const PremiumHeroPreview = () => (
+  <div className="hero-browser-wrap relative w-full max-w-[min(100%,38rem)] lg:max-w-none mx-auto lg:mx-0">
+    <div className="hero-orbit hidden lg:block" aria-hidden="true">
+      <span className="hero-orbit-ring" />
+      <span className="hero-orbit-ring hero-orbit-ring-2" />
+    </div>
+
+    <div className="hero-float-card hero-float-card-top hidden sm:flex">
+      <div className="hero-float-icon text-purple-300">
+        <Activity className="w-4 h-4" />
+      </div>
+      <div>
+        <p className="text-[10px] text-zinc-500 uppercase tracking-wider">AI Insight</p>
+        <p className="text-xs font-semibold text-white">+12% learner engagement</p>
+      </div>
+    </div>
+
+    <div className="hero-float-card hero-float-card-bottom hidden sm:flex">
+      <div className="hero-float-icon text-emerald-300">
+        <CheckCircle2 className="w-4 h-4" />
+      </div>
+      <div>
+        <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Auto-graded</p>
+        <p className="text-xs font-semibold text-white">1,240 assessments today</p>
+      </div>
+    </div>
+
+    <div className="hero-browser-frame">
+      <div className="hero-browser-glow" aria-hidden="true" />
+
+      <div className="hero-browser relative rounded-xl sm:rounded-2xl overflow-hidden bg-zinc-950">
+        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/10 bg-zinc-900/95">
+          <div className="flex gap-1.5 flex-shrink-0">
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f57]" />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#febc2e]" />
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#28c840]" />
+          </div>
+          <div className="flex-1 min-w-0 flex justify-center">
+            <div className="flex items-center gap-1.5 sm:gap-2 w-full max-w-[240px] sm:max-w-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-black/50 border border-white/10">
+              <Lock className="w-3 h-3 text-emerald-500/80 flex-shrink-0" />
+              <span className="text-[10px] sm:text-xs text-zinc-300 truncate font-medium">learnspire.ai/dashboard</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 hero-status-dot" />
+            <span className="text-[9px] sm:text-[10px] font-medium text-emerald-400/90 hidden xs:inline">AI Live</span>
+          </div>
+        </div>
+
+        <div className="relative bg-white overflow-hidden hero-dashboard-screen">
+          <div className="hero-dashboard-hud top-4 left-4 hidden md:block">
+            <div className="flex items-center gap-2">
+              <span className="hero-pulse-dot" />
+              <span>Live campus intelligence</span>
+            </div>
+          </div>
+          <div className="hero-dashboard-hud bottom-4 right-4 hidden md:block">
+            <div className="flex items-center gap-2">
+              <Zap className="w-3.5 h-3.5 text-amber-300" />
+              <span>AI actions synced</span>
+            </div>
+          </div>
+          <img
+            src={dashboardImg}
+            alt="Learnspire AI institution dashboard"
+            className="w-full h-auto block object-cover object-top"
+            loading="eager"
+            draggable={false}
+          />
+          <div className="hero-scan-line" aria-hidden="true" />
+          <div className="hero-screen-sheen" aria-hidden="true" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-zinc-950/40 to-transparent pointer-events-none" />
+        </div>
+      </div>
+    </div>
+
+    <div className="hero-metric-rail hidden lg:grid" aria-label="Platform metrics">
+      {HERO_METRICS.map((metric) => (
+        <div key={metric.label} className="hero-metric-pill">
+          <span>{metric.value}</span>
+          <small>{metric.label}</small>
+        </div>
+      ))}
     </div>
   </div>
 );
@@ -728,6 +841,38 @@ const Home = () => {
       { opacity: 1, y: 0, duration: 0.6, delay: 0.5, stagger: 0.12, ease: 'power2.out' }
     );
 
+    gsap.fromTo(
+      '.hero-capability-pill, .hero-module-card, .hero-metric-pill',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.55, delay: 0.35, stagger: 0.055, ease: 'power2.out' }
+    );
+
+    gsap.to('.hero-browser-frame', {
+      y: -10,
+      duration: 4.8,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+
+    gsap.to('.hero-float-card-top', {
+      y: -8,
+      x: 4,
+      duration: 3.8,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+
+    gsap.to('.hero-float-card-bottom', {
+      y: 8,
+      x: -4,
+      duration: 4.2,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+
     gsap.utils.toArray('.feature-card').forEach((card) => {
       gsap.fromTo(
         card,
@@ -785,13 +930,15 @@ const Home = () => {
           <div className="relative z-10 flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24 w-full">
             <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 sm:gap-12 lg:gap-10 xl:gap-14 items-center h-full">
               <div className="hero-content flex flex-col gap-5 sm:gap-6 text-center lg:text-left order-1">
-                <div className="inline-flex items-center gap-2 self-center lg:self-start px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-md text-[10px] font-bold text-white hero-ai-badge">AI</span>
-                  <span className="text-[11px] sm:text-xs font-medium text-zinc-300">Next-gen institutional intelligence</span>
+                <div className="hero-eyebrow inline-flex items-center gap-2 self-center lg:self-start px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-md text-white hero-ai-badge">
+                    <Cpu className="w-3 h-3" />
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-bold text-white">Premium AI campus operating system</span>
                 </div>
 
                 <h1
-                  className="font-display font-bold tracking-tight leading-[1.05] px-1 sm:px-0"
+                  className="hero-title font-display font-extrabold tracking-tight leading-[1.05] px-1 sm:px-0"
                   style={{ fontSize: 'clamp(2rem, 5.5vw + 0.25rem, 3.75rem)' }}
                 >
                   <span className="text-white">Where campuses</span>
@@ -799,18 +946,18 @@ const Home = () => {
                   <span className="text-shimmer">meet AI.</span>
                 </h1>
 
-                <p className="text-zinc-400 leading-relaxed max-w-lg mx-auto lg:mx-0 text-[15px] sm:text-base lg:text-lg px-2 sm:px-0">
+                <p className="hero-copy leading-relaxed max-w-xl mx-auto lg:mx-0 text-[15px] sm:text-base lg:text-lg px-2 sm:px-0">
                   One intelligent platform for LMS, AMS &amp; PMS — with white-labeling, AI proctoring, coding labs, and LSRW built in.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 max-w-lg mx-auto lg:mx-0">
-                  {AI_CAPABILITIES.map((cap) => (
+                  {HERO_CAPABILITIES.map(({ label, Icon }) => (
                     <span
-                      key={cap.label}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-zinc-400 border border-white/[0.07] bg-white/[0.03] hover:border-purple-500/30 hover:text-zinc-200 transition-colors"
+                      key={label}
+                      className="hero-capability-pill inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold text-zinc-100 border border-white/[0.07] bg-white/[0.03] hover:border-purple-500/30 hover:text-white transition-colors"
                     >
-                      <span className="text-purple-400 text-[10px]">{cap.icon}</span>
-                      {cap.label}
+                      <Icon className="w-3.5 h-3.5 text-purple-300" />
+                      {label}
                     </span>
                   ))}
                 </div>
@@ -834,16 +981,19 @@ const Home = () => {
                     { value: 'PMS', label: 'Performance', desc: 'Profile & growth' },
                   ].map((mod) => (
                     <div key={mod.value} className="hero-module-card group rounded-xl border border-white/[0.08] bg-white/[0.02] px-2 sm:px-3 py-3 sm:py-4 text-center lg:text-left transition-colors hover:border-purple-500/25 hover:bg-white/[0.04]">
+                      <div className="mb-2 hidden lg:flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-purple-300">
+                        <Layers3 className="w-3.5 h-3.5" />
+                      </div>
                       <p className="text-sm sm:text-lg font-bold text-gradient-brand tracking-tight">{mod.value}</p>
-                      <p className="text-[10px] sm:text-xs text-zinc-400 mt-0.5 font-medium">{mod.label}</p>
-                      <p className="text-[9px] sm:text-[10px] text-zinc-600 mt-1 hidden sm:block group-hover:text-zinc-500 transition-colors">{mod.desc}</p>
+                      <p className="text-[10px] sm:text-xs text-zinc-200 mt-0.5 font-semibold">{mod.label}</p>
+                      <p className="text-[9px] sm:text-[10px] text-zinc-400 mt-1 hidden sm:block group-hover:text-zinc-200 transition-colors">{mod.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="hero-visual w-full order-2 pb-4 sm:pb-8 lg:pb-0">
-                <HeroPreview />
+                <PremiumHeroPreview />
               </div>
             </div>
           </div>
