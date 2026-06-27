@@ -7,7 +7,7 @@ import BrandName from './BrandName';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const smoothEase = [0.22, 1, 0.36, 1];
+  const smoothEase = [0.16, 1, 0.3, 1];
 
   useEffect(() => {
     let ticking = false;
@@ -89,21 +89,21 @@ const Header = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.35, ease: smoothEase }}
-              className="fixed inset-0 bg-black/65 backdrop-blur-md z-[1001]"
+              transition={{ duration: 0.24, ease: smoothEase }}
+              className="fixed inset-0 bg-black/70 z-[1001]"
               onClick={toggleMenu}
             />
 
             <motion.div
-              initial={{ x: '100%', opacity: 0.7 }}
+              initial={{ x: '100%', opacity: 0.96 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0.7 }}
-              transition={{ duration: 0.42, ease: smoothEase }}
-              className="fixed top-0 right-0 w-full max-w-sm h-full z-[1002] flex flex-col border-l border-white/10 shadow-2xl shadow-black/50"
+              exit={{ x: '100%', opacity: 0.96 }}
+              transition={{ duration: 0.3, ease: smoothEase }}
+              className="fixed top-0 right-0 w-full max-w-sm h-full z-[1002] flex flex-col border-l border-white/10 shadow-2xl shadow-black/50 transform-gpu will-change-transform"
               style={{ background: 'linear-gradient(160deg, #0a0a14 0%, #0d0d1a 100%)' }}
             >
-              <div className="absolute top-0 right-0 w-48 h-48 bg-purple-700/10 rounded-full blur-[80px] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-pink-700/10 rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-purple-700/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-pink-700/10 rounded-full blur-3xl pointer-events-none" />
 
               <div className="flex items-center justify-between px-5 h-16 border-b border-white/[0.06] relative z-10">
                 <BrandName size="sm" />
@@ -122,7 +122,7 @@ const Header = () => {
                     key={item.path}
                     initial={{ x: 18, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.12 + index * 0.055, duration: 0.36, ease: smoothEase }}
+                    transition={{ delay: 0.06 + index * 0.035, duration: 0.24, ease: smoothEase }}
                   >
                     <Link
                       to={item.path}

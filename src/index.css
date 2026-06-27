@@ -572,6 +572,37 @@
   animation: float 6s ease-in-out 2s infinite;
 }
 
+@media (max-width: 767px) {
+  .hero-premium-mesh,
+  .hero-aurora,
+  .hero-screen-sheen,
+  .hero-scan-line::after,
+  .hero-orbit-ring,
+  .hero-browser-frame {
+    animation: none !important;
+  }
+
+  .hero-aurora {
+    filter: blur(48px);
+    opacity: 0.45;
+  }
+
+  .hero-browser-glow {
+    filter: blur(18px);
+    opacity: 0.45;
+  }
+
+  .hero-dashboard-hud,
+  .hero-float-card,
+  .hero-metric-pill {
+    backdrop-filter: none;
+  }
+
+  .hero-circuit-grid {
+    opacity: 0.12;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

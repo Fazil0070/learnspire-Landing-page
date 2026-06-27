@@ -110,6 +110,8 @@ const HeroPreview = () => (
             alt="Learnspire AI institution dashboard"
             className="w-full h-auto block object-cover object-top"
             loading="eager"
+            decoding="async"
+            fetchPriority="high"
             draggable={false}
           />
           <div className="hero-scan-line" aria-hidden="true" />
@@ -187,6 +189,8 @@ const PremiumHeroPreview = () => (
             alt="Learnspire AI institution dashboard"
             className="w-full h-auto block object-cover object-top"
             loading="eager"
+            decoding="async"
+            fetchPriority="high"
             draggable={false}
           />
           <div className="hero-scan-line" aria-hidden="true" />
@@ -822,6 +826,7 @@ const Home = () => {
 
   const setupAnimations = useCallback(() => {
     ScrollTrigger.config({ limitCallbacks: true });
+    const canRunContinuousHeroMotion = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)').matches;
 
     gsap.fromTo(
       '.hero-content',
@@ -847,31 +852,33 @@ const Home = () => {
       { opacity: 1, y: 0, duration: 0.55, delay: 0.35, stagger: 0.055, ease: 'power2.out' }
     );
 
-    gsap.to('.hero-browser-frame', {
-      y: -10,
-      duration: 4.8,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
-    });
+    if (canRunContinuousHeroMotion) {
+      gsap.to('.hero-browser-frame', {
+        y: -8,
+        duration: 5.6,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
 
-    gsap.to('.hero-float-card-top', {
-      y: -8,
-      x: 4,
-      duration: 3.8,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
-    });
+      gsap.to('.hero-float-card-top', {
+        y: -6,
+        x: 3,
+        duration: 4.4,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
 
-    gsap.to('.hero-float-card-bottom', {
-      y: 8,
-      x: -4,
-      duration: 4.2,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
-    });
+      gsap.to('.hero-float-card-bottom', {
+        y: 6,
+        x: -3,
+        duration: 4.8,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+    }
 
     gsap.utils.toArray('.feature-card').forEach((card) => {
       gsap.fromTo(
