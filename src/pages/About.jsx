@@ -10,7 +10,7 @@ const TeamMember = ({ name, role, image }) => (
     <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-pink-500/10 rounded-full blur-[120px]" />
     <div className="relative z-10">
       <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-2 border-purple-500">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <img src={image} alt={name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
       </div>
       <h3 className="text-xl font-bold text-white text-center mb-2">{name}</h3>
       <p className="text-purple-400 text-center">{role}</p>

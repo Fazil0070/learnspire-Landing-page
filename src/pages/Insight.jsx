@@ -42,6 +42,8 @@ const CodingChallengesImage = () => (
       <img
         src={codingChallenges || ''}
         alt="Coding Challenges Dashboard"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -57,6 +59,8 @@ const StudentResultsImage = () => (
       <img
         src={studentResults || ''}
         alt="Student Results Dashboard"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -72,6 +76,8 @@ const Dashboard = () => (
       <img
         src={dashboard || ''}
         alt="Dashboard"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -87,6 +93,8 @@ const AnalysisImage = () => (
       <img
         src={analysis || ''}
         alt="Analysis Dashboard"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -102,6 +110,8 @@ const PrepDashboardImage = () => (
       <img
         src={prep || ''}
         alt="Prep Dashboard"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -117,6 +127,8 @@ const CommunicationImage = () => (
       <img
         src={communication || ''}
         alt="Communication Dashboard"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -132,6 +144,8 @@ const PMSImage = () => (
       <img
         src={profile || ''}
         alt="Profile & Performance Management System"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -147,6 +161,8 @@ const LearnspirePrepAnalyticsImage = () => (
       <img
         src={prepresult || ''}
         alt="Learnspire Prep Analytics"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
@@ -162,6 +178,8 @@ const PerformanceManagementSystemImage = () => (
       <img
         src={performance || ''}
         alt="Performance Management System"
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
       />
     </div>
