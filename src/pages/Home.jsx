@@ -27,6 +27,8 @@ const HeroBackground = () => (
     <div className="absolute inset-0 hero-glow" />
     <div className="absolute inset-0 hero-premium-mesh" />
 
+    <Interactive3DCanvas />
+
     <div className="hero-aurora hero-aurora-1" />
     <div className="hero-aurora hero-aurora-2" />
     <div className="hero-aurora hero-aurora-3" />
@@ -122,94 +124,290 @@ const HeroPreview = () => (
   </div>
 );
 
-const PremiumHeroPreview = () => (
-  <div className="hero-browser-wrap relative w-full max-w-[min(100%,38rem)] lg:max-w-none mx-auto lg:mx-0">
-    <div className="hero-orbit hidden lg:block" aria-hidden="true">
-      <span className="hero-orbit-ring" />
-      <span className="hero-orbit-ring hero-orbit-ring-2" />
-    </div>
+const Interactive3DCanvas = () => {
+  const canvasRef = useRef(null);
 
-    <div className="hero-float-card hero-float-card-top hidden sm:flex">
-      <div className="hero-float-icon text-purple-300">
-        <Activity className="w-4 h-4" />
-      </div>
-      <div>
-        <p className="text-[10px] text-zinc-500 uppercase tracking-wider">AI Insight</p>
-        <p className="text-xs font-semibold text-white">+12% learner engagement</p>
-      </div>
-    </div>
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    <div className="hero-float-card hero-float-card-bottom hidden sm:flex">
-      <div className="hero-float-icon text-emerald-300">
-        <CheckCircle2 className="w-4 h-4" />
-      </div>
-      <div>
-        <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Auto-graded</p>
-        <p className="text-xs font-semibold text-white">1,240 assessments today</p>
-      </div>
-    </div>
+    let animationFrameId;
+    let width = canvas.width = canvas.offsetWidth;
+    let height = canvas.height = canvas.offsetHeight;
 
-    <div className="hero-browser-frame">
-      <div className="hero-browser-glow" aria-hidden="true" />
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
 
-      <div className="hero-browser relative rounded-xl sm:rounded-2xl overflow-hidden bg-zinc-950">
-        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/10 bg-zinc-900/95">
-          <div className="flex gap-1.5 flex-shrink-0">
-            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f57]" />
-            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#febc2e]" />
-            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#28c840]" />
-          </div>
-          <div className="flex-1 min-w-0 flex justify-center">
-            <div className="flex items-center gap-1.5 sm:gap-2 w-full max-w-[240px] sm:max-w-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-black/50 border border-white/10">
-              <Lock className="w-3 h-3 text-emerald-500/80 flex-shrink-0" />
-              <span className="text-[10px] sm:text-xs text-zinc-300 truncate font-medium">learnspire.ai/dashboard</span>
+    const particles = [];
+    const particleCount = Math.min(50, Math.floor((width * height) / 25000));
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        z: Math.random() * 2 + 0.5,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 1.5 + 0.8,
+      });
+    }
+
+    let mouse = { x: null, y: null, targetX: null, targetY: null };
+    const handleMouseMove = (e) => {
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.targetX = null;
+      mouse.targetY = null;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      if (mouse.targetX !== null && mouse.targetY !== null) {
+        if (mouse.x === null) {
+          mouse.x = mouse.targetX;
+          mouse.y = mouse.targetY;
+        } else {
+          mouse.x += (mouse.targetX - mouse.x) * 0.08;
+          mouse.y += (mouse.targetY - mouse.y) * 0.08;
+        }
+      } else {
+        mouse.x = null;
+        mouse.y = null;
+      }
+
+      particles.forEach((p, index) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        if (mouse.x !== null) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180) {
+            const force = (180 - dist) / 2200;
+            p.x -= dx * force * p.z;
+            p.y -= dy * force * p.z;
+          }
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * p.z, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(168, 85, 247, ${0.12 * p.z})`;
+        ctx.fill();
+
+        for (let j = index + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(139, 92, 246, ${(110 - dist) / 110 * 0.06 * Math.min(p.z, p2.z)})`;
+            ctx.lineWidth = 0.5 * Math.min(p.z, p2.z);
+            ctx.stroke();
+          }
+        }
+      });
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />;
+};
+
+const PremiumHeroPreview = () => {
+  const containerRef = useRef(null);
+  const cardRef = useRef(null);
+  const glowRef = useRef(null);
+  const sheenRef = useRef(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    const container = containerRef.current;
+    if (!card || !container) return;
+
+    let requestRef = null;
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const onMouseMove = (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const xc = rect.width / 2;
+      const yc = rect.height / 2;
+
+      // Limit max tilt to 12 degrees
+      targetX = -(y - yc) / (yc / 12);
+      targetY = (x - xc) / (xc / 12);
+
+      // Follow cursor with shine overlay
+      if (sheenRef.current) {
+        const sheenX = (x / rect.width) * 100;
+        const sheenY = (y / rect.height) * 100;
+        sheenRef.current.style.background = `radial-gradient(circle 120px at ${sheenX}% ${sheenY}%, rgba(255, 255, 255, 0.16), transparent)`;
+      }
+      if (glowRef.current) {
+        const glowX = (x / rect.width) * 100;
+        const glowY = (y / rect.height) * 100;
+        glowRef.current.style.background = `radial-gradient(circle 280px at ${glowX}% ${glowY}%, rgba(168, 85, 247, 0.28), rgba(96, 165, 250, 0.22), transparent 80%)`;
+      }
+    };
+
+    const onMouseLeave = () => {
+      targetX = 0;
+      targetY = 0;
+      if (sheenRef.current) {
+        sheenRef.current.style.background = '';
+      }
+      if (glowRef.current) {
+        glowRef.current.style.background = '';
+      }
+    };
+
+    const updateTilt = () => {
+      // Lerp for smooth transition
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      card.style.transform = `perspective(1200px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+      requestRef = requestAnimationFrame(updateTilt);
+    };
+
+    container.addEventListener('mousemove', onMouseMove, { passive: true });
+    container.addEventListener('mouseleave', onMouseLeave, { passive: true });
+    requestRef = requestAnimationFrame(updateTilt);
+
+    return () => {
+      container.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('mouseleave', onMouseLeave);
+      cancelAnimationFrame(requestRef);
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className="hero-browser-wrap relative w-full max-w-[min(100%,38rem)] lg:max-w-none mx-auto lg:mx-0">
+      <div className="hero-orbit hidden lg:block" aria-hidden="true">
+        <span className="hero-orbit-ring" />
+        <span className="hero-orbit-ring hero-orbit-ring-2" />
+      </div>
+
+      <div className="hero-float-card hero-float-card-top hidden sm:flex">
+        <div className="hero-float-icon text-purple-300">
+          <Activity className="w-4 h-4" />
+        </div>
+        <div>
+          <p className="text-[10px] text-zinc-500 uppercase tracking-wider">AI Insight</p>
+          <p className="text-xs font-semibold text-white">+12% learner engagement</p>
+        </div>
+      </div>
+
+      <div className="hero-float-card hero-float-card-bottom hidden sm:flex">
+        <div className="hero-float-icon text-emerald-300">
+          <CheckCircle2 className="w-4 h-4" />
+        </div>
+        <div>
+          <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Auto-graded</p>
+          <p className="text-xs font-semibold text-white">1,240 assessments today</p>
+        </div>
+      </div>
+
+      <div ref={cardRef} className="hero-browser-frame will-change-transform transform-gpu transition-shadow duration-300">
+        <div ref={glowRef} className="hero-browser-glow" aria-hidden="true" />
+
+        <div className="hero-browser relative rounded-xl sm:rounded-2xl overflow-hidden bg-zinc-950">
+          <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/10 bg-zinc-900/95">
+            <div className="flex gap-1.5 flex-shrink-0">
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f57]" />
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#febc2e]" />
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#28c840]" />
+            </div>
+            <div className="flex-1 min-w-0 flex justify-center">
+              <div className="flex items-center gap-1.5 sm:gap-2 w-full max-w-[240px] sm:max-w-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-black/50 border border-white/10">
+                <Lock className="w-3 h-3 text-emerald-500/80 flex-shrink-0" />
+                <span className="text-[10px] sm:text-xs text-zinc-300 truncate font-medium">learnspire.ai/dashboard</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 hero-status-dot" />
+              <span className="text-[9px] sm:text-[10px] font-medium text-emerald-400/90 hidden xs:inline">AI Live</span>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 hero-status-dot" />
-            <span className="text-[9px] sm:text-[10px] font-medium text-emerald-400/90 hidden xs:inline">AI Live</span>
-          </div>
-        </div>
 
-        <div className="relative bg-white overflow-hidden hero-dashboard-screen">
-          <div className="hero-dashboard-hud top-4 left-4 hidden md:block">
-            <div className="flex items-center gap-2">
-              <span className="hero-pulse-dot" />
-              <span>Live campus intelligence</span>
+          <div className="relative bg-white overflow-hidden hero-dashboard-screen">
+            <div className="hero-dashboard-hud top-4 left-4 hidden md:block">
+              <div className="flex items-center gap-2">
+                <span className="hero-pulse-dot" />
+                <span>Live campus intelligence</span>
+              </div>
             </div>
-          </div>
-          <div className="hero-dashboard-hud bottom-4 right-4 hidden md:block">
-            <div className="flex items-center gap-2">
-              <Zap className="w-3.5 h-3.5 text-amber-300" />
-              <span>AI actions synced</span>
+            <div className="hero-dashboard-hud bottom-4 right-4 hidden md:block">
+              <div className="flex items-center gap-2">
+                <Zap className="w-3.5 h-3.5 text-amber-300" />
+                <span>AI actions synced</span>
+              </div>
             </div>
+            <img
+              src={dashboardImg}
+              alt="Learnspire AI institution dashboard"
+              className="w-full h-auto block object-cover object-top"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              draggable={false}
+            />
+            <div className="hero-scan-line" aria-hidden="true" />
+            <div ref={sheenRef} className="hero-screen-sheen absolute inset-0 pointer-events-none mix-blend-screen transition-opacity duration-300" aria-hidden="true" />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-zinc-950/40 to-transparent pointer-events-none" />
           </div>
-          <img
-            src={dashboardImg}
-            alt="Learnspire AI institution dashboard"
-            className="w-full h-auto block object-cover object-top"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-            draggable={false}
-          />
-          <div className="hero-scan-line" aria-hidden="true" />
-          <div className="hero-screen-sheen" aria-hidden="true" />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-zinc-950/40 to-transparent pointer-events-none" />
         </div>
       </div>
-    </div>
 
-    <div className="hero-metric-rail hidden lg:grid" aria-label="Platform metrics">
-      {HERO_METRICS.map((metric) => (
-        <div key={metric.label} className="hero-metric-pill">
-          <span>{metric.value}</span>
-          <small>{metric.label}</small>
-        </div>
-      ))}
+      <div className="hero-metric-rail mt-8 lg:mt-0 grid grid-cols-3 gap-3 w-full lg:absolute lg:right-[-1rem] lg:bottom-[-4.75rem] lg:w-[min(92%,34rem)] z-30" aria-label="Platform metrics">
+        {HERO_METRICS.map((metric) => (
+          <div key={metric.label} className="hero-metric-pill">
+            <span>{metric.value}</span>
+            <small>{metric.label}</small>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Scroll Progress Indicator
 const ScrollProgress = () => {
@@ -828,28 +1026,69 @@ const Home = () => {
     ScrollTrigger.config({ limitCallbacks: true });
     const canRunContinuousHeroMotion = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)').matches;
 
-    gsap.fromTo(
-      '.hero-content',
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }
+    // Create an elegant entrance animation timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.fromTo(
+      '.hero-eyebrow',
+      { opacity: 0, y: -15 },
+      { opacity: 1, y: 0, duration: 0.8 }
     );
 
-    gsap.fromTo(
+    tl.fromTo(
+      '.hero-title',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.9 },
+      '-=0.6'
+    );
+
+    tl.fromTo(
+      '.hero-copy',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8 },
+      '-=0.75'
+    );
+
+    tl.fromTo(
+      '.hero-capability-pill',
+      { opacity: 0, scale: 0.9, y: 10 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.05 },
+      '-=0.7'
+    );
+
+    tl.fromTo(
+      '.hero-section .btn-primary, .hero-section .btn-secondary',
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.1 },
+      '-=0.6'
+    );
+
+    tl.fromTo(
+      '.hero-module-card',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
+      '-=0.6'
+    );
+
+    tl.fromTo(
       '.hero-visual',
-      { opacity: 0, y: 24, scale: 0.98 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.8, delay: 0.15, ease: 'power2.out' }
+      { opacity: 0, scale: 0.95, y: 30, rotateY: 10 },
+      { opacity: 1, scale: 1, y: 0, rotateY: 0, duration: 1.1, ease: 'power4.out' },
+      '-=1.2'
     );
 
-    gsap.fromTo(
+    tl.fromTo(
       '.hero-float-card',
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.5, stagger: 0.12, ease: 'power2.out' }
+      { opacity: 0, scale: 0.9, y: 20 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.12 },
+      '-=0.6'
     );
 
-    gsap.fromTo(
-      '.hero-capability-pill, .hero-module-card, .hero-metric-pill',
-      { opacity: 0, y: 16 },
-      { opacity: 1, y: 0, duration: 0.55, delay: 0.35, stagger: 0.055, ease: 'power2.out' }
+    tl.fromTo(
+      '.hero-metric-pill',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.08 },
+      '-=0.8'
     );
 
     if (canRunContinuousHeroMotion) {
